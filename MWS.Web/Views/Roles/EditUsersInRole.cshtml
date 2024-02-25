@@ -1,0 +1,60 @@
+﻿@model List<UserRoleViewModel>
+
+@{
+    var roleId = ViewBag.RoleId;
+    ViewData["Title"] = "Edit Users Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <form method="post">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Assign Roles</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/Roles/Index">Roles List</a></li>
+                            <li class="breadcrumb-item">Update Role</li>
+                            <li class="breadcrumb-item active">Assign Role</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-secondary">
+                            <div class="card-body">
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    <div class="form-check m-1">
+                                        <input type="hidden" asp-for="@Model[i].UserId"/>
+                                        <input type="hidden" asp-for="@Model[i].UserName"/>
+                                        <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                                        <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                                            @Model[i].UserName
+                                        </label>
+                                    </div>
+                                }
+
+                            </div>
+                            <div class="card-footer">
+                                <input type="submit" value="UPDATE" class="btn btn-primary" style="width:auto" />
+                                <button asp-action="Index" class="btn btn-danger"><i class="fa fa-window-close"></i> CANCEL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>

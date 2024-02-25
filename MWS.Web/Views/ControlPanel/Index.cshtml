@@ -1,0 +1,193 @@
+﻿@model MWS.Web.Models.ControlPanelViewModel;
+@{
+    ViewData["Title"] = "Settings";
+    Layout = "_Layout";
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Water System Rates</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active">Water System Rates</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">WATER CONSUMPTION RATES</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example2" data-widget="expandable-table" class="table table-bordered table-hover">
+                                @*<table id="example1" data-widget="expandable-table" class="table table-bordered table-hover">*@
+                                <thead>
+                                    <tr>
+                                        <th>Bracket</th>
+                                        <th>Minimum</th>
+                                        <th>11 to 30</th>
+                                        <th>31 to 50</th>
+                                        <th>51 to 70</th>
+                                        <th>71 to 90</th>
+                                        <th>91 to 110</th>
+                                        <th>111 to 130</th>
+                                        <th>131 to 150</th>
+                                        <th>151 to 170</th>
+                                        <th>171 to 190</th>
+                                        <th>191 to 10000</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var mrate in Model.Mrates)
+                                    {
+                                        <tr>
+                                            <td>@mrate.Bracket</td>
+                                            <td>@mrate.Minimum</td>
+                                            <td>@mrate._11to30</td>
+                                            <td>@mrate._31to50</td>
+                                            <td>@mrate._51to70</td>
+                                            <td>@mrate._71to90</td>
+                                            <td>@mrate._91to110</td>
+                                            <td>@mrate._111to130</td>
+                                            <td>@mrate._131to150</td>
+                                            <td>@mrate._151to170</td>
+                                            <td>@mrate._171to190</td>
+                                            <td>@mrate._191to10000</td>
+                                            <td>
+                                                <a class="btn btn-info btn-xs" asp-controller="ControlPanel" asp-action="Update" asp-route-id="@mrate.Metid"> <i class="fa fa-check-square"></i> Edit</a>
+                                                 <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-default"> <i class="fa fa-trash"></i> Delete</a>
+                                                    <div class="modal fade" id="modal-default">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Delete Water Rate</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Are you sure you want to delete selected water rate?</p>
+                                                                </div>
+                                                                <div class="modal-footer justify-content-between">
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                    <form method="post" asp-action="Delete" asp-route-id="@mrate.Metid">
+                                                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            <a class="btn btn-primary wd-50" asp-controller="ControlPanel" asp-action="Create"> <i class="fa fa-plus-square"></i> New Water Consumption Rates</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">FEES</h3>
+                        </div>
+                        <form method="post" asp-action="UpdateFee">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Fee.ConnectionFee" class="control-label"></label>
+                                            <input asp-for="Fee.ConnectionFee" class="form-control" />
+                                            <span asp-validation-for="Fee.ConnectionFee" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Fee.ReconFee" class="control-label"></label>
+                                            <input asp-for="Fee.ReconFee" class="form-control" />
+                                            <span asp-validation-for="Fee.ReconFee" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Fee.Surcharge" class="control-label"></label>
+                                            <input asp-for="Fee.Surcharge" class="form-control" />
+                                            <span asp-validation-for="Fee.Surcharge" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Fee.TransferCharge" class="control-label"></label>
+                                            <input asp-for="Fee.TransferCharge" class="form-control" />
+                                            <span asp-validation-for="Fee.TransferCharge" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Fee.SeniorDiscount" class="control-label"></label>
+                                            <input asp-for="Fee.SeniorDiscount" class="form-control" />
+                                            <span asp-validation-for="Fee.SeniorDiscount" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Fee.EnvironmentalFee" class="control-label"></label>
+                                            <input asp-for="Fee.EnvironmentalFee" class="form-control" />
+                                            <span asp-validation-for="Fee.SeniorDiscount" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col align-self-end">
+                                        <div class="form-group">
+                                            <a class="btn btn-primary" data-toggle="modal" data-target="#modal-default-fee"><i class="fa fa-save"></i> Update</a>
+                                    <div class="modal fade" id="modal-default-fee">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Update Fees</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to update fees?</p>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> Cancel</button>
+                                                    <form method="post" asp-action="UpdateFee">
+                                                       <input type="hidden" asp-for="Fee.Id" class="form-control" />
+                                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
+                                                    </form>
+                                                </div>
+                                            </div>e
+                                        </div>
+                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

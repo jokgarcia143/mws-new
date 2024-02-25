@@ -1,0 +1,168 @@
+﻿@font-face {
+    font-family: inherit;
+    src: url(~/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+}
+
+body {
+    font-family: 'Roboto', Fallback, sans-serif;
+}
+
+.box {
+    border: 1px solid black;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    font-size: 0.9em;
+}
+
+img {
+    margin-top: 0.8em;
+    margin-right: 1.5em;
+}
+
+.right-col {
+    font-size: 0.95em;
+    text-align: center;
+}
+
+th {
+    border-bottom: thick double #424444;
+    text-align: start;
+}
+
+td, th {
+    padding-right: 2em;
+    font-size: 0.9em;
+    padding-top: 0.5em;
+}
+
+th {
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+    table td, table th {
+        overflow-wrap: anywhere;
+    }
+
+caption {
+    border-top: thick double #424444;
+    border-bottom: thick double #424444;
+}
+
+.main-header, .sub-header, .address-cta, .notice-cta {
+    margin-bottom: -0.5em;
+}
+
+.main-header {
+    font-weight: 800;
+    font-size: 1.2em;
+}
+
+.notice-cta {
+    font-weight: 700;
+}
+
+.tables-section {
+    display: none;
+}
+* {
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+}
+
+h1 {
+    color: black;
+    font-family: Calibri, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 15pt;
+}
+
+p {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+    margin: 0pt;
+}
+
+h2 {
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 12pt;
+}
+
+h3 {
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 9pt;
+}
+
+h4 {
+    color: #808080;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+.s1 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 1pt;
+}
+
+.s2 {
+    color: #808080;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+    vertical-align: 1pt;
+}
+
+.s3 {
+    color: #FFF;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+.s4 {
+    color: black;
+    font-family: "Arial Narrow", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+table, tbody {
+    vertical-align: top;
+    overflow: visible;
+}

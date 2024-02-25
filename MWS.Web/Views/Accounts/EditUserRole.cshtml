@@ -1,0 +1,58 @@
+﻿@model EditUserRoleViewModel;
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Update Account</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/Accounts/Index">Home</a></li>
+                        <li class="breadcrumb-item active">Update Account</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="consumer-list" class="content">
+        <div class="container-fluid">
+            <div class="tab-pane fade show active" id="custom-tabs-five-overlay" role="tabpanel" aria-labelledby="custom-tabs-five-overlay-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="UserName"></label>
+                                                <input asp-for="UserName" class="form-control" />
+                                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Email"></label>
+                                                <input asp-for="Email" class="form-control" />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+                                    <button type="submit" class="btn btn-primary">REGISTER</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,126 @@
+﻿@font-face {
+    font-family: inherit;
+    src: url(~/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+}
+
+body {
+    font-family: inherit, Fallback, sans-serif;
+}
+
+.pdf-table, .pdf-th {
+    border: 1px solid black;
+}
+
+
+
+.pdf-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+img {
+    margin: 0.5em;
+}
+
+form.form-example {
+    display: table;
+}
+
+div.form-example {
+    display: table-row;
+}
+
+label, .input-credentials {
+    display: table-cell;
+    margin-bottom: 0.7em;
+    margin-top: 0.2em;
+    font-size: 0.7em;
+}
+
+label {
+    text-align: left;
+    padding-left: 0.5em;
+}
+
+.input-credentials {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    padding-right: 8em;
+}
+
+    .input-credentials::placeholder {
+        opacity: 500;
+        color: black;
+        font-weight: bold;
+        padding-right: 20em;
+    }
+
+.last-input-credential {
+    margin-bottom: 0em;
+}
+
+.input-balance {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+label {
+    padding-right: 10px;
+}
+
+.notice-cta {
+    margin: 0.5em;
+    color: #D00202;
+    font-size: 0.8em;
+    font-weight: 800;
+}
+
+.sub-header, .contact-num-cta {
+    margin: 0.5em;
+    font-size: 0.7em;
+}
+
+.main-header {
+    margin: 0.5em;
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.paragraph-cta {
+    font-size: 0.6em;
+    margin-top: -1em;
+    margin-bottom: 0.8em;
+    text-align: start;
+    margin-right: 0.2em;
+    margin-left: 0.5em;
+    padding-bottom: 0.73em;
+}
+
+.underline {
+    font-weight: bold;
+}
+
+.underline-text {
+    color: #D00202;
+    padding-bottom: 10%;
+    font-size: 1.2em;
+}
+
+.disregard-notice-cta {
+    color: #D00202;
+    font-weight: 700;
+    font-size: 0.8em;
+    margin: 0;
+    margin-top: -0.6em;
+}
+
+.pdf-section {
+    display: none;
+}

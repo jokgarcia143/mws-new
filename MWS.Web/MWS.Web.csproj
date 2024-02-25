@@ -1,0 +1,87 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\fonts - Copy\**" />
+    <Compile Remove="wwwroot\NewFolder\**" />
+    <Compile Remove="wwwroot\rotativa\**" />
+    <Content Remove="wwwroot\fonts - Copy\**" />
+    <Content Remove="wwwroot\NewFolder\**" />
+    <Content Remove="wwwroot\rotativa\**" />
+    <EmbeddedResource Remove="wwwroot\fonts - Copy\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\rotativa\**" />
+    <None Remove="wwwroot\fonts - Copy\**" />
+    <None Remove="wwwroot\NewFolder\**" />
+    <None Remove="wwwroot\rotativa\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\TestController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\mws_seal.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\mws_seal.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspose.PDF" Version="22.5.0" />
+    <PackageReference Include="DinkToPdf" Version="1.0.8" />
+    <PackageReference Include="HtmlRenderer.PdfSharp" Version="1.5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="PuppeteerSharp" Version="7.1.0" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.2.0" />
+    <PackageReference Include="Select.HtmlToPdf.NetCore" Version="22.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\" />
+    <Folder Include="wwwroot\fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\plugins\bootstrap-datepicker\css\bootstrap-datepicker.css.map" />
+    <None Include="wwwroot\plugins\bootstrap-datepicker\css\bootstrap-datepicker.standalone.css.map" />
+    <None Include="wwwroot\plugins\bootstrap-datepicker\css\bootstrap-datepicker3.css.map" />
+    <None Include="wwwroot\plugins\bootstrap-datepicker\css\bootstrap-datepicker3.standalone.css.map" />
+    <None Include="wwwroot\plugins\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <None Include="wwwroot\plugins\bootstrap-datepicker\js\bootstrap-datepicker.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="libwkhtmltox.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="libwkhtmltox.dylib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="libwkhtmltox.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

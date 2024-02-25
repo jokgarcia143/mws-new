@@ -1,0 +1,345 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MWS.Web.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    @*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">*@
+    @*<link rel="stylesheet" href="../../dist/css/style.css"/>*@
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- Main -->
+    <link rel="stylesheet" href="~/dist/css/main.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="~/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/dist/css/layout.css">
+    <link rel="icon" type="image/x-icon" href="~/dist/img/mws_seal.ico">
+
+    <partial name="_LoadingScreen" />
+
+
+    
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="../../Home/Index" class="brand-link">
+                <img src="../../dist/img/mws_seal.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">MWS Web</span>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <!-- Sidebar user (optional) -->
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        </div>
+                        <div class="info">
+                            @*<a class="d-block" asp-area="Identity" asp-page="/Account/Manage/Index">@UserManager.GetUserName(User)</a>*@
+                            <a class="d-block">@UserManager.GetUserName(User)</a>
+                        </div>
+                    </div>
+                    <!-- Sidebar Menu -->
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            @if (User.IsInRole("Staff") || User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a href="/Dashboard/" class="nav-link">
+                                        <i class="nav-icon fa fa-thermometer-empty"></i>
+                                        <p>
+                                            Dashboard
+                                        </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/ConsumersData/" class="nav-link">
+                                        <i class="nav-icon fa fa-users"></i>
+                                        <p>
+                                            Consumers
+                                        </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/WaterBillGenerator/" class="nav-link">
+                                        <i class="nav-icon fa fa-credit-card"></i>
+                                        <p>
+                                            Bill Generator
+                                        </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/DisconnectionNotice/" class="nav-link">
+                                        <i class="nav-icon fa fa-plug"></i>
+                                        <p>
+                                            Disconnection Notice
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Cashier") || User.IsInRole("Staff") || User.IsInRole("Administrator"))
+                                        {
+                                <li class="nav-item">
+                                    <a href="/ConsumersSummary/" class="nav-link">
+                                        <i class="nav-icon fa fa-address-card"></i>
+                                        <p>
+                                            Summary
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Cashier"))
+                            {
+                                <li class="nav-item">
+                                    <a href="/Payments/" class="nav-link">
+                                        <i class="nav-icon fa fa-money-bill"></i>
+                                        <p>
+                                            Payments
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Staff") || User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a href="/Reports/" class="nav-link">
+                                        <i class="nav-icon fa fa-file"></i>
+                                        <p>
+                                            Reports
+                                        </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/ControlPanel/" class="nav-link">
+                                        <i class="nav-icon fa fa-cog"></i>
+                                        <p>
+                                            Settings
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item menu-open">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-book"></i>
+                                        <p>
+                                            Administration
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/Roles/" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Roles</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/Accounts/" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Accounts</p>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
+                }
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        @RenderBody()
+
+        <!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 1.0.0
+            </div>
+            <strong>Copyright &copy; 2022 <a href="https://cavite.gov.ph/magallanes/index.php/about-the-lgu/profile/2-uncategorised/620-water-system">Magallanes Water System</a>.</strong> All rights reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+
+    
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="~/plugins/select2/js/select2.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.js"></script>
+
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael -->
+    <script src="~/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="~/plugins/raphael/raphael.min.js"></script>
+    <script src="~/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+    <script src="~/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/plugins/chart.js/Chart.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/jszip/jszip.min.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+   
+    <!-- Page specific script -->
+    <script>
+        var url = window.location;
+        const allLinks = document.querySelectorAll('.nav-item a');
+        const currentLink = [...allLinks].filter(e => {
+            return e.href == url;
+        });
+        if (currentLink.length > 0) {
+            currentLink[0].classList.add("active");
+        }
+
+        $(function () {
+            $(window).on('load', function () {
+                $(".overlay-wrapper").hide();
+                $("#consumer-list").show();
+                $("#consumers-summary").show();
+                $("#water-bill-generator").show();
+                $("#consumer-summary-details").show();
+            });
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+            $('#example3').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+
+            $("#datepicker").datepicker();
+            $('.toastrDeleteConsumerSuccess').click(function () {
+                toastr.success('Consumer deleted successfully!')
+            });
+            $('.toastrAddConsumerSuccess').click(function () {
+                toastr.success('Added new consumer successfully!')
+            });
+            $('.toastrUpdateConsumerSuccess').click(function () {
+                toastr.success('Consumer details updated successfully!')
+            });
+            // Show loading popup when a form is submitted
+            $('form').submit(function () {
+                $('#loading-popup').show();
+            });
+
+            // Hide loading popup when the postback is complete
+            $(document).ajaxStop(function () {
+                $('#loading-popup').hide();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(document).ajaxStart(function () {
+                // Show loading screen when an AJAX request starts
+                $('#loading-screen').show();
+            }).ajaxStop(function () {
+                // Hide loading screen when all AJAX requests are complete
+                $('#loading-screen').hide();
+            });
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <div id="loading-popup" style="display: none;">
+        <p>Loading...</p>
+    </div>
+</body>
+</html>

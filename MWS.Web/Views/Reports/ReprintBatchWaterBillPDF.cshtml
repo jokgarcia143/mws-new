@@ -1,0 +1,188 @@
+﻿@model IEnumerable<MWS.Web.Models.CustomersSummary>
+
+@{
+    ViewData["Title"] = "Water Bill";
+    Layout = null;
+}
+
+
+<head>
+    <link rel="stylesheet" href="~/dist/css/two-copy.css" type="text/css">
+    <script src="~/dist/js/two-copy.js?@ViewData["Title"]"></script>
+    <script src="~/dist/js/html2pdf.bundle.js"></script>
+    <style type="text/css"></style>
+</head>
+<a onclick="myAlert()" id="pdfGenerate"></a>
+
+<section class="pdfGenerate">
+
+    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+    <table id="table" style="border-collapse:collapse;margin-left:5.565pt" cellspacing="0">
+        @foreach (var pdf in Model)
+        {
+
+        <tr style="height:135pt">
+
+            <td style="width:288pt;border-top-style:solid;border-top-width:3pt;border-top-color:#808080;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="6">
+                <img src="~/dist/img/mws_seal.png" style="padding-left:15px;padding-top:2px;WIDTH: 80px;HEIGHT: 80px;float:left;" class="mws-seal">
+                <p class="s1" style="padding-left: 85pt;text-indent: 0pt;line-height: 16pt;text-align: left;">MAGALLANES WATER SYSTEM</p>
+                <p class="s2" style="padding-top: 3pt;padding-left: 93pt;padding-right: 15pt;text-indent: 23pt;line-height: 131%;text-align: left;">Municipality of Magallanes,Cavite <span style=" color: #3F3F3F;">Contact Nos: (09958248272) (00000000000)</span></p>
+                <p class="s2" style="padding-bottom: 3pt;padding-left: 91pt;text-indent: 0pt;text-align: left;">WATER BILL NO:<span class="s4">   </span><span class="s5"><u>@pdf.WaterBillNo</u></span></p>
+                <p style="padding-left: 158pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                    <p class="s6" style="padding-top: 6pt;padding-bottom: 3pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Customer:  <span style="padding-left: 10px;" class="s3"><u>@pdf.Name </u></span>  <span style="padding-bottom: 2pt;padding-right: 10pt;text-indent: 0pt;float: right"><u>@pdf.PresDate2.ToString("yyyy-MM-dd")</u></span></p>
+                <p class="s7" style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;"> </p>
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Account No:  <span class="s9"><u>@pdf.AcctNo     </u>               </span><span style="padding-bottom: 2pt;padding-right: 15pt;text-indent: 0pt;float: right" class="s4">Date</span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s6" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Address:   <span style="padding-left: 17px;" class="s3"><u>@pdf.Address</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Meter No:<span class="s10">  </span><span style="padding-left: 10pt;" class="s9"><u>@pdf.MeterNo</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s11" style="padding-right: 12pt;text-indent: 0pt;line-height: 7pt;text-align: right;"> &#160;</p>
+                <p class="s8" style="padding-top: 6pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">Period Covered    <span style="padding-left: 30pt;text-indent: 0pt;">Meter Reading</span></p>
+            </td>
+            <td style="width:288pt;border-top-style:solid;border-top-width:3pt;border-top-color:#808080;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="6">
+                <img src="~/dist/img/mws_seal.png" style="padding-left:15px;padding-top:2px;WIDTH: 80px;HEIGHT: 80px;float:left;" class="mws-seal">
+                <p class="s1" style="padding-left: 85pt;text-indent: 0pt;line-height: 16pt;text-align: left;">MAGALLANES WATER SYSTEM</p>
+                <p class="s2" style="padding-top: 3pt;padding-left: 93pt;padding-right: 15pt;text-indent: 23pt;line-height: 131%;text-align: left;">Municipality of Magallanes,Cavite <span style=" color: #3F3F3F;">Contact Nos: (09958248272)</span></p>
+                <p class="s2" style="padding-bottom: 3pt;padding-left: 91pt;text-indent: 0pt;text-align: left;">WATER BILL NO:<span class="s4">   </span><span class="s5"><u>@pdf.WaterBillNo</u></span></p>
+                <p style="padding-left: 158pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                    <p class="s6" style="padding-top: 6pt;padding-bottom: 3pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Customer:  <span style="padding-left: 10px;" class="s3"><u>@pdf.Name </u></span>  <span style="padding-bottom: 2pt;padding-right: 10pt;text-indent: 0pt;float: right"><u>@pdf.PresDate2.ToString("yyyy-MM-dd")</u></span></p>
+                <p class="s7" style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;"> </p>
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Account No:  <span class="s9"><u>@pdf.AcctNo     </u>               </span><span style="padding-bottom: 2pt;padding-right: 15pt;text-indent: 0pt;float: right" class="s4">Date</span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s6" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Address:   <span style="padding-left: 17px;" class="s3"><u>@pdf.Address</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Meter No:<span class="s10">  </span><span style="padding-left: 10pt;" class="s9"><u>@pdf.MeterNo</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s11" style="padding-right: 12pt;text-indent: 0pt;line-height: 7pt;text-align: right;">( DUPLICATE COPY )</p>
+                <p class="s8" style="padding-top: 6pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">Period Covered    <span style="padding-left: 30pt;text-indent: 0pt;">Meter Reading</span></p>
+            </td>
+
+        </tr>
+        <tr style="height:14pt">
+            <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 6pt;padding-right: 6pt;text-indent: 0pt;line-height: 9pt;text-align: center;">From</p>
+            </td>
+            <td style="width:44pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">To</p>
+            </td>
+            <td style="width:43pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 6pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Present</p>
+            </td>
+            <td style="width:43pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">Previous</p>
+            </td>
+            <td style="width:58pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 7pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Consumed</p>
+            </td>
+            <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 8pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Due Date</p>
+            </td>
+            <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 6pt;padding-right: 6pt;text-indent: 0pt;line-height: 9pt;text-align: center;">From</p>
+            </td>
+            <td style="width:44pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">To</p>
+            </td>
+            <td style="width:43pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 6pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Present</p>
+            </td>
+            <td style="width:43pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">Previous</p>
+            </td>
+            <td style="width:58pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 7pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Consumed</p>
+            </td>
+            <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s8" style="padding-left: 8pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Due Date</p>
+            </td>
+        </tr>
+        <tr style="height:14pt">
+            <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s11" style="padding-left: 6pt;padding-right: 6pt;text-indent: 0pt;line-height: 9pt;text-align: center;">@pdf.PresDate2.ToString("yyyy-MM-dd")</p>
+            </td>
+            <td style="width:44pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s11" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">@pdf.PresDate2.ToString("yyyy-MM-dd")</p>
+            </td>
+            <td style="width:43pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s11" style="padding-left: 13pt;padding-right: 14pt;text-indent: 0pt;line-height: 9pt;text-align: center;">@pdf.Reading</p>
+            </td>
+            <td style="width:43pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s11" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">@pdf.PrevRead</p>
+            </td>
+            <td style="width:58pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s11" style="padding-left: 13pt;text-indent: 0pt;line-height: 9pt;text-align: left;">@pdf.Consumed  cu. m</p>
+            </td>
+            <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s11" style="padding-left: 6pt;text-indent: 0pt;line-height: 9pt;text-align: left;">@pdf.DueDate</p>
+            </td>
+            <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s11" style="padding-left: 6pt;padding-right: 6pt;text-indent: 0pt;line-height: 9pt;text-align: center;">@pdf.PresDate2.ToString("yyyy-MM-dd")</p>
+            </td>
+            <td style="width:44pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s11" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">@pdf.PresDate2.ToString("yyyy-MM-dd")</p>
+            </td>
+            <td style="width:43pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s11" style="padding-left: 13pt;padding-right: 14pt;text-indent: 0pt;line-height: 9pt;text-align: center;">@pdf.PrevRead</p>
+            </td>
+            <td style="width:43pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s11" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">289</p>
+            </td>
+            <td style="width:58pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s11" style="padding-left: 13pt;text-indent: 0pt;line-height: 9pt;text-align: left;">@pdf.Consumed cu. m</p>
+            </td>
+            <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s11" style="padding-left: 7pt;text-indent: 0pt;line-height: 9pt;text-align: left;">@pdf.DueDate</p>
+            </td>
+        </tr>
+        <tr style="height:56pt">
+            <td style="width:130pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:3pt;border-bottom-color:#808080;border-right-style:solid;border-right-width:1pt" colspan="3" rowspan="3">
+                <p class="s12" style="padding-left: 10pt;padding-right: 7pt;text-indent: -3pt;text-align: left;">Water service maybe disconnected if accounts are not settled fifteen</p>
+                <p class="s12" style="padding-left: 15pt;padding-right: 3pt;text-indent: -8pt;text-align: left;">(15) days after the due date.Failure to pay seven (7) calendar days after due date will result to a</p>
+                <p class="s12" style="padding-left: 27pt;text-indent: 0pt;line-height: 10pt;text-align: left;">surcharge of Php 60.00</p>
+            </td>
+            <td style="width:158pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3">
+                <p class="s13" style="padding-left: 7pt;text-indent: 0pt;line-height: 11pt;text-align: left;">Current Billing  <span style="padding-left: 15pt;" class="s14">P</span><span class="s10">      </span><span style="float: right;padding-right: 10px" class="s15"><u>@pdf.CurrentBill</u></span></p>
+                <p style="padding-left: 86pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s13" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Previous Balance <span style="padding-left: 3pt;" class="s14">P</span><span class="s10">      </span><span style="float: right;padding-right: 10px" class="s15"><u>@pdf.PrevBal</u></span></p>
+                <p style="padding-left: 86pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s13" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Others     <span style="padding-left: 41pt;" class="s14">P</span><span class="s10">        </span><span style="float: right;padding-right: 10px" class="s15"><u>@pdf.Others</u></span></p>
+                <p style="padding-left: 86pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s13" style="padding-left: 7pt;text-indent: 0pt;text-align: left;">Amount Due   <span style="padding-left: 20pt" class="s14">P</span><span class="s10">       </span><span style="float: right;padding-right: 10px" class="s15"><u>@pdf.AmountBilled</u></span></p>
+            </td>
+            <td style="width:130pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:3pt;border-bottom-color:#808080;border-right-style:solid;border-right-width:1pt" colspan="3" rowspan="3">
+                <p class="s12" style="padding-left: 10pt;padding-right: 7pt;text-indent: -3pt;text-align: left;">Water service maybe disconnected if accounts are not settled fifteen</p>
+                <p class="s12" style="padding-left: 15pt;padding-right: 3pt;text-indent: -8pt;text-align: left;">(15) days after the due date.Failure to pay seven (7) calendar days after due date will result to a</p>
+                <p class="s12" style="padding-left: 27pt;text-indent: 0pt;line-height: 10pt;text-align: left;">surcharge of Php 60.00</p>
+            </td>
+            <td style="width:158pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3">
+                <p class="s13" style="padding-left: 7pt;text-indent: 0pt;line-height: 11pt;text-align: left;">Current Billing  <span style="padding-left: 15pt;" class="s14">P</span><span class="s10">      </span><span style="float: right;padding-right: 10px" class="s15"><u>@pdf.CurrentBill</u></span></p>
+                <p style="padding-left: 86pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s13" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Previous Balance <span style="padding-left: 3pt;" class="s14">P</span><span class="s10">      </span><span style="float: right;padding-right: 10px" class="s15"><u>@pdf.PrevBal</u></span></p>
+                <p style="padding-left: 86pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s13" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Others     <span style="padding-left: 41pt;" class="s14">P</span><span class="s10">        </span><span style="float: right;padding-right: 10px" class="s15"><u>@pdf.Others</u></span></p>
+                <p style="padding-left: 86pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s13" style="padding-left: 7pt;text-indent: 0pt;text-align: left;">Amount Due   <span style="padding-left: 20pt" class="s14">P</span><span class="s10">       </span><span style="float: right;padding-right: 10px" class="s15"><u>@pdf.AmountBilled</u></span></p>
+            </td>
+        </tr>
+        <tr style="height:8pt">
+            <td style="width:158pt;border-left-style:solid;border-left-width:1pt" colspan="3" bgcolor="#FF8000">
+                <p class="s2" style="padding-left: 39pt;text-indent: 0pt;line-height: 7pt;text-align: left;">powered by GRAY OWL TECH</p>
+            </td>
+            <td style="width:158pt;border-left-style:solid;border-left-width:1pt" colspan="3" bgcolor="#FF8000">
+                <p class="s2" style="padding-left: 39pt;text-indent: 0pt;line-height: 7pt;text-align: left;">powered by GRAY OWL TECH</p>
+            </td>
+        </tr>
+        <tr style="height:2pt">
+            <td style="width:158pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:3pt;border-bottom-color:#808080;border-right-style:solid;border-right-width:1pt" colspan="3" bgcolor="#FF8000">
+                <p style="text-indent: 0pt;text-align: left;"><br /></p>
+            </td>
+            <td style="width:158pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:3pt;border-bottom-color:#808080;border-right-style:solid;border-right-width:1pt" colspan="3" bgcolor="#FF8000">
+                <p style="text-indent: 0pt;text-align: left;"><br /></p>
+            </td>
+        </tr>
+       }
+    </table>
+
+
+</section>

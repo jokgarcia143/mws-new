@@ -1,0 +1,88 @@
+﻿@model MWS.Web.Models.CustomerViewModel
+@{
+    ViewData["Title"] = "Consumer Summary of Transactions";
+    Layout = "_Layout";
+}
+
+<div class="content-wrapper">
+    <form method="post">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Consumer List</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                            <li class="breadcrumb-item active">Consumer Summary of Transactions</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="consumers-summary" class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))" o"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="submit" value="Submit" class="btn btn-primary"> <i class="fa fa-search"></i> Search </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table id="example3" data-widget="expandable-table" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Account No.</th>
+                                            <th>Meter No.</th>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
+                                            <th>Address</th>
+                                            <th>Account Type
+                                            <th>Senior</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var customer in Model.Customers)
+                                        {
+                                            <tr>
+                                                <td>@customer.AcctNo</td>
+                                                <td>@customer.MeterNo</td>
+                                                <td>@customer.Lname</td>
+                                                <td>@customer.Fname</td>
+                                                <td>@(String.Format("{0} {1} {2}", customer.Barangay, customer.UnitNo, customer.Street))</td>
+                                                <td>@customer.AcctType</td>
+                                                @if(customer.Senior == false)
+                                                {
+                                                    <td>NO</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>YES</td>
+                                                }
+                                                <td>
+                                                    <a href="@Url.Action("Details", "ConsumersSummary", new { @customer.Id})" class="btn btn-info btn-xs" target="_blank"> <i class="fa fa-check-square"></i> VIEW</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
+

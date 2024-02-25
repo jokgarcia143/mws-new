@@ -1,0 +1,22 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/MWS
+/MWS.Web/bin/Debug/net5.0
+/MWS.Web/obj
+/MWS.Web/appsettings.json
+/admin-lte-dotnet
+/MWS.mdb
+/MWS.Web/bin/Release/net5.0
+/.vs/MWS latest/v17
+/.vs/Raymund/v17
+/.vs/
+/MWS.Web/bin/Debug/net5.0-windows
+/Mag.mdb
+/OnTheBett - Video - Online Betting HTML5 Website Template_files
+/DB
+/FIX_SCRIPT.sql
+/FIX_SCRIPT_2.sql
+/Mag.ldb
+/Quotation

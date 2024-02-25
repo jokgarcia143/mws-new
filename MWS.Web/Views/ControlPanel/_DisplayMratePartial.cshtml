@@ -1,0 +1,72 @@
+﻿@model MWS.Web.Models.Mrate
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="_DisplayMratePartial">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Bracket" class="control-label"></label>
+                <input asp-for="Bracket" class="form-control" />
+                <span asp-validation-for="Bracket" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Minimum" class="control-label"></label>
+                <input asp-for="Minimum" class="form-control" />
+                <span asp-validation-for="Minimum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_11to30" class="control-label"></label>
+                <input asp-for="_11to30" class="form-control" />
+                <span asp-validation-for="_11to30" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_31to50" class="control-label"></label>
+                <input asp-for="_31to50" class="form-control" />
+                <span asp-validation-for="_31to50" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_51to70" class="control-label"></label>
+                <input asp-for="_51to70" class="form-control" />
+                <span asp-validation-for="_51to70" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_71to90" class="control-label"></label>
+                <input asp-for="_71to90" class="form-control" />
+                <span asp-validation-for="_71to90" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_91to110" class="control-label"></label>
+                <input asp-for="_91to110" class="form-control" />
+                <span asp-validation-for="_91to110" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_111to130" class="control-label"></label>
+                <input asp-for="_111to130" class="form-control" />
+                <span asp-validation-for="_111to130" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_131to150" class="control-label"></label>
+                <input asp-for="_131to150" class="form-control" />
+                <span asp-validation-for="_131to150" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_151to170" class="control-label"></label>
+                <input asp-for="_151to170" class="form-control" />
+                <span asp-validation-for="_151to170" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_171to190" class="control-label"></label>
+                <input asp-for="_171to190" class="form-control" />
+                <span asp-validation-for="_171to190" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_191to10000" class="control-label"></label>
+                <input asp-for="_191to10000" class="form-control" />
+                <span asp-validation-for="_191to10000" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

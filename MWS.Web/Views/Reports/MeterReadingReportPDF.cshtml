@@ -1,0 +1,86 @@
+﻿@model MWS.Web.Models.MeterReadingReportsViewModel
+
+@{
+    ViewData["Title"] = "Meter Reading Report";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/dist/css/table-with-totals.css">
+    <script src="~/dist/js/table-with-parameter.js?@ViewData["Title"]"></script>
+    <script src="~/dist/js/html2pdf.bundle.js"></script>
+</head>
+
+<a onclick="myAlert()" id="pdfGenerate"></a>
+<section class="pdfGenerate">
+    <table id="table" class="bordered-table">
+        <caption>
+            <div class="container">
+                <div class="left-col">
+                    <img width="100" height="100" src="~/dist/img/mws_seal.png" class="mws-seal">
+                </div>
+                <div class="right-col">
+                    <h3 class="main-header">MAGALLANES WATER SYSTEM</h3>
+                    <p class="sub-header">Province of Cavite</p>
+                    <p class="address-cta">Municipality of Magallanes, Cavite</p>
+                    <h3 class="notice-cta">METER READING</h3>
+                    <p class="barangay-cta">@Model.Barangay</p>
+                </div>
+            </div>
+        </caption>
+        <thead>
+            <tr>
+                <th>
+                    <p>Name</p>
+                </th>
+                <th>
+                    <p>Account No</p>
+                </th>
+                <th>
+                    <p>Meter No</p>
+                </th>
+                <th>
+                    <p>Initial Reading</p>
+                </th>
+                <th>
+                    <p>Current Reading</p>
+                </th>
+                <th>
+                    <p>Date</p>
+                </th>
+                <th>
+                    <p>Status</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var meterReading in Model.CustomerMeterReadings)
+            {
+                <tr>
+                    <td>
+                        <p>@meterReading.Name</p>
+                    </td>
+                    <td>
+                        <p>@meterReading.AcctNo</p>
+                    </td>
+                    <td>
+                        <p>@meterReading.MeterNo</p>
+                    </td>
+
+                    <td>
+                        <p style="color:red"><b>@meterReading.InitialReading</b></p>
+                    </td>
+                    <td>
+                        <p>@meterReading.CurrentReading</p>
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        <p style="color:red"><b>@meterReading.Status</b></p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

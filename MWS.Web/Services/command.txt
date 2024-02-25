@@ -1,0 +1,2 @@
+﻿dotnet ef dbcontext scaffold "Server=THEREALUSER;Database=MWSWeb;User Id=mws;Password=London@12345;Trusted_Connection=false;MultipleActiveResultSets=true" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models --project MWS.Web --force
+Server=THEREALUSER;Database=MWSWeb;User Id=mws;Password=London@12345;Trusted_Connection=false;MultipleActiveResultSets=true

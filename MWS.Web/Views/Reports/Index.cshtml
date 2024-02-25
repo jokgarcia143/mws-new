@@ -1,0 +1,549 @@
+﻿@model MWS.Web.Models.ReportsViewModel;
+
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "_Layout";
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Reports</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active">Reports</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-secondary card-tabs">
+                        <div class="card-header p-0 pt-1">
+                            <ul class="nav nav-tabs" id="custom-tabs-five-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-tabs-five-normal-tab" data-toggle="pill" href="#custom-tabs-five-generalreports" role="tab" aria-controls="custom-tabs-five-normal" aria-selected="true">GENERAL REPORTS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-five-normal-tab" data-toggle="pill" href="#custom-tabs-five-cubicconsumed" role="tab" aria-controls="custom-tabs-five-normal" aria-selected="false">CUBIC CONSUMED</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-five-normal-tab" data-toggle="pill" href="#custom-tabs-five-billedaccounts" role="tab" aria-controls="custom-tabs-five-normal" aria-selected="false">BILLED ACCOUNTS</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-five-tabContent">
+                                @* General Reports-Tab-1 *@
+                                <div class="tab-pane fade show active" id="custom-tabs-five-generalreports" role="tabpanel" aria-labelledby="custom-tabs-five-normal-tab">
+                                    @* General Reports-Row-1 *@
+                                    <div class="row">
+                                        @*LEFT*@
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Meter Reading Report</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form asp-action="MeterReadingReportPDF" target="_blank">
+                                                        <div class="row">
+                                                            <div class="col-md-2 text-md-right">
+                                                                <label>Barangay</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))" o"></select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <button class="btn btn-primary btn-block" value="submit" > <i class="fa fa-print"></i> Print </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*RIGHT*@
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">New Connections</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form asp-action="NewConnectionsReportPDF" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Year</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="SelectedYear" name="SelectedYear" asp-for="SelectedYear" asp-items="@(new SelectList(ViewBag.Years))"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                                <button class="btn btn-primary btn-block" value="submit"> <i class="fa fa-print"></i> Print </button>
+                                                        </div>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* General Reports-Row-2 *@
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Water Bill Batch Printing</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form asp-action="ReprintBatchWaterBillPDF" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Month</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                    <select class="form-control" id="MonthId" name="MonthId" asp-for="MonthId" asp-items="@ViewBag.Months">
+                                                                    <option value="">Select a month</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Year</label>
+                                                        </div>
+                                                         <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                    <select class="form-control" id="SelectedYear" name="SelectedYear" asp-for="SelectedYear" asp-items="@(new SelectList(ViewBag.Years))"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Barangay</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                    <select class="form-control" id="SelectedBrgy" name="SelectedBrgy" asp-for="SelectedBrgy" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                                @* <a class="btn btn-primary btn-block" asp-controller="" asp-action=""> <i class="fa fa-print"></i> Print Anchor </a> *@
+                                                                <button type="submit" onclick="getYear()" class="btn btn-primary btn-block"> <i class="fa fa-print"></i> Print </button>
+                                                                @* <a target="_blank" asp-route-id="@Model.BarangayId" asp-route-id="@Model.MonthId" asp-action="ReprintBatchWaterBillPDF" id="btn-reprint" class="btn btn-info btn-xs"> <i class="fa fa-print"></i> REPRINT WATER BILL</a>
+
+                                                                <input asp-route-id="@Model.BarangayId" asp-route-id="@Model.MonthId" type="submit" value="REQUEST" /> *@
+                                                        </div>
+                      
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Total No. of Connections</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form method="post" target="_blank">
+                                                        <div class="row">
+                                                            <div class="col-md-8 text-md-right">
+                                                                <label></label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <button class="btn btn-primary btn-block" value="submit" asp-action="NumberOfConnectionsReportPDF"> <i class="fa fa-print"></i> Print </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* General Reports-Row-3 *@
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Closed or T-Closed Consumers</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form method="post" target="_blank">
+                                                        <div class="row">
+                                                            <div class="col-md-2 text-md-right">
+                                                                <label>Barangay</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))" o"></select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <button class="btn btn-primary btn-block" value="submit" asp-action="ClosedConsumersReportPDF"> <i class="fa fa-print"></i> Print </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @* Cubic Consumed-Tab-2 *@
+                                <div class="tab-pane fade" id="custom-tabs-five-cubicconsumed" role="tabpanel" aria-labelledby="custom-tabs-five-normal-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Monthly Cubic Consumed per Barangay</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form asp-action="ReprintCubicConsumedPerBrgyPDF" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Month</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="MonthIdCubicBrgy" name="MonthIdCubicBrgy" asp-for="MonthIdCubicBrgy" asp-items="@ViewBag.Months">
+                                                                    <option value="">Select a month</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Year</label>
+                                                        </div>
+                                                       <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="YearIdCubicBrgy" name="YearIdCubicBrgy" asp-for="YearIdCubicBrgy" asp-items="@(new SelectList(ViewBag.Years))"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Barangay</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="CubicBarangayId" asp-for="CubicBarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))" o"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="submit" onclick="getYearCubicBrgy()" class="btn btn-primary btn-block"> <i class="fa fa-print"></i> Print </button>
+                                                        </div>
+                                                    </div>
+                                                   </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Annual Cubic Consumed</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Year</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <a class="btn btn-primary btn-block" asp-controller="" asp-action=""> <i class="fa fa-print"></i> Print </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Monthly Cubic Consumed per Barangay / Account Type</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Month</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Year</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Barangay</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))" o"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Account Type</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" asp-items="@(new SelectList(Model.AccountTypes))" o"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <a class="btn btn-primary btn-block" asp-controller="" asp-action=""> <i class="fa fa-print"></i> Print </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Annual Test Consumed / Account Type</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Year</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+
+                                                                <select class="form-control"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Account Type</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" asp-items="@(new SelectList(Model.AccountTypes))" o"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <a class="btn btn-primary btn-block" asp-controller="" asp-action=""> <i class="fa fa-print"></i> Print </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                @* Billed Accounts-Tab-3 *@
+                                <div class="tab-pane fade" id="custom-tabs-five-billedaccounts" role="tabpanel" aria-labelledby="custom-tabs-five-normal-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Monthly Billed for Accounts per Barangay</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Month</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Year</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Barangay</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))" o"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <a class="btn btn-primary btn-block" asp-controller="" asp-action=""> <i class="fa fa-print"></i> Print </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*  <div class="col-6">
+                                        <div class="card card-info">
+                                        <div class="card-header">
+                                        <h3 class="card-title">Annual Cubic Consumed</h3>
+                                        </div>
+                                        <div class="card-body">
+                                        <div class="row">
+                                        <div class="col-md-2 text-md-right">
+                                        <label>Year</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+
+                                        <select class="form-control"></select>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <a class="btn btn-primary btn-block" asp-controller="" asp-action=""> <i class="fa fa-print"></i> Print </a>
+                                        </div>
+                                        </div>
+
+                                        </div>
+                                        </div>
+                                        </div>*@
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Monthly Billed for Accounts per Barangay / Account Type</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Month</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Year</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Barangay</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))" o"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-md-right">
+                                                            <label>Account Type</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select class="form-control" asp-items="@(new SelectList(Model.AccountTypes))" o"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <a class="btn btn-primary btn-block" asp-controller="" asp-action=""> <i class="fa fa-print"></i> Print </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*      <div class="col-6">
+                                        <div class="card card-info">
+                                        <div class="card-header">
+                                        <h3 class="card-title">Annual Test Consumed / Account Type</h3>
+                                        </div>
+                                        <div class="card-body">
+                                        <div class="row">
+                                        <div class="col-md-2 text-md-right">
+                                        <label>Year</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+
+                                        <select class="form-control"></select>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-md-2 text-md-right">
+                                        <label>Account Type</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                        <select class="form-control" asp-items="@(new SelectList(Model.AccountTypes))" o"></select>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <a class="btn btn-primary btn-block" asp-controller="" asp-action=""> <i class="fa fa-print"></i> Print </a>
+                                        </div>
+                                        </div>
+
+                                        </div>
+                                        </div>
+                                        </div>*@
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    function getYear() {
+        var selectedValue = $("#SelectedYear").val();
+        var selectedText = $("#SelectedYear option:selected").text();
+    }
+    function getBrgy() {
+        var selectedValue = $("#SelectedBrgy").val();
+        var selectedText = $("#SelectedBrgy option:selected").value();
+    }
+    function getYearCubicBrgy() {
+        var selectedValue = $("#YearIdCubicBrgy").val();
+        var selectedText = $("#YearIdCubicBrgy option:selected").text();
+    }
+    function getBrgyCubic() {
+        var selectedValue = $("#CubicBarangayId").val();
+        var selectedText = $("#CubicBarangayId option:selected").value();
+    }
+</script>

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<MWS.Web.Models.Disconnection>
+
+@{
+    ViewData["Title"] = "DisconnectionPDF";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/dist/css/disconnection-pdf.css">
+    @* <script src="~/dist/js/disconnection-pdf.js"></script> *@
+    <script src="~/dist/js/two-copy.js?@ViewData["Title"]"></script>
+    <script src="~/dist/js/html2pdf.bundle.js"></script>
+    <style type="text/css"></style>
+</head>
+<a onclick="myAlert()" id="pdfGenerate">Please wait while PDF is still downloading...</a>
+<h3><span>NOTE</span>:CAN PRINT UP TO <span style="color:red">50 PAGES</span> ONLY</h3>
+<section class="pdfGenerate">
+    <table id="table" class="pdf-table">
+        @foreach (var disconnection in Model)
+        {
+            <tr class="pdf-tr">
+                <th class="pdf-th">      
+                    <section class="first-row">
+                        <div class="header-container">
+                            <div class="left-col">
+                                <img width="90" height="90" src="~/dist/img/mws_seal.png" class="mws-seal">
+                            </div>
+                            <div class="right-col">
+                                <h1 class="main-header">MAGALLANES WATER SYSTEM</h1>
+                                <p class="sub-header">Municipality of Magallanes, Cavite</p>
+                                <p class="contact-num-cta">Contact Nos: (09958248272) (00000000000)</p>
+                                <p class="notice-cta">NOTICE OF DISCONNECTION</p>
+                            </div>
+                        </div>
+                        <div class="credentials-container">
+                                <div class="form-example">
+                                    <label for="Id">No: </label>
+                                    <input placeholder="@disconnection.Id" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="Customer">Customer: </label>
+                                    <input placeholder="@disconnection.Name" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="AccountNo">Account No: </label>
+                                    <input placeholder="@disconnection.AcctNo" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="Address">Address: </label>
+                                    <input placeholder="@disconnection.Address" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="MeterNo">Meter No: </label>
+                                    <input placeholder="@disconnection.MeterNo" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="Balance">Balance: </label>
+                                    <input placeholder="@disconnection.Balance" class="input-credentials last-input-credential">
+                                </div>
+                        </div>
+                        <br />
+                        <div class="paragraph-container">
+                            <p class="paragraph-cta">Ipinapaalam po namin na hindi pa ninyo nababayaran ang halagang <u class="underline"><span class="underline-text">&ensp;&ensp;@disconnection.Balance&ensp;&ensp;</span></u> </p>
+                            <p class="paragraph-cta">bilang kabayaran sa nagamit na tubig.</p>
+                            <p class="paragraph-cta">Ipinakiusap po namin na kelangang mabayaran ang nasabing halaga bago sumapit and takdang panahon upang maiwasan ang pagkakaputol ng serbisyo ng tubig sa inyo.</p>
+                            <p class="disregard-notice-cta">PLEASE DISREGARD THIS NOTICE IF ALREADY PAID</p>
+                        </div>
+                    </section>
+                </th>
+                <th class="pdf-th">
+                    <section class="first-row">
+                        <div class="header-container">
+                            <div class="left-col">
+                                <img width="90" height="90" src="~/dist/img/mws_seal.png" class="mws-seal">
+                            </div>
+                            <div class="right-col">
+                                <h1 class="main-header">MAGALLANES WATER SYSTEM</h1>
+                                <p class="sub-header">Municipality of Magallanes, Cavite</p>
+                                <p class="contact-num-cta">Contact Nos: (09958248272) (00000000000)</p>
+                                <p class="notice-cta">NOTICE OF DISCONNECTION</p>
+                            </div>
+                        </div>
+                        <div class="credentials-container">
+                                <div class="form-example">
+                                    <label for="Id">No: </label>
+                                    <input placeholder="@disconnection.Id" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="Customer">Customer: </label>
+                                    <input placeholder="@disconnection.Name" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="AccountNo">Account No: </label>
+                                    <input placeholder="@disconnection.AcctNo" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="Address">Address: </label>
+                                    <input placeholder="@disconnection.Address" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="MeterNo">Meter No: </label>
+                                    <input placeholder="@disconnection.MeterNo" class="input-credentials">
+                                </div>
+                                <div class="form-example">
+                                    <label for="Balance">Balance: </label>
+                                    <input placeholder="@disconnection.Balance" class="input-credentials last-input-credential">
+                                </div>
+                        </div>
+                        <br />
+                        <div class="paragraph-container">
+                            <p class="paragraph-cta">Ipinapaalam po namin na hindi pa ninyo nababayaran ang halagang <u class="underline"><span class="underline-text">&ensp;&ensp;@disconnection.Balance&ensp;&ensp;</span></u> </p>
+                            <p class="paragraph-cta">bilang kabayaran sa nagamit na tubig.</p>
+                            <p class="paragraph-cta">Ipinakiusap po namin na kelangang mabayaran ang nasabing halaga bago sumapit and takdang panahon upang maiwasan ang pagkakaputol ng serbisyo ng tubig sa inyo.</p>
+                            <p class="disregard-notice-cta">PLEASE DISREGARD THIS NOTICE IF ALREADY PAID</p>
+
+                        </div>
+                    </section>
+                </th>
+            </tr>
+        }
+    </table>
+</section>
+

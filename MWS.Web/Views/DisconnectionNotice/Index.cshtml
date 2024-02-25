@@ -1,0 +1,92 @@
+﻿@model MWS.Web.Models.DisconnectionNoticeViewModel;
+
+@{
+    ViewData["Title"] = "Disconnection Notice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <form method="post">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Disconnection Notice</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                            <li class="breadcrumb-item active">Disconnection Notice</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card" id="mainBody">
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))" o"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="submit" value="Submit" class="btn btn-primary"> <i class="fa fa-search"></i> Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table id="example3" data-widget="expandable-table" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>TransNo.</th>
+                                            <th>Account No.</th>
+                                            <th>Name</th>
+                                            <th>Address</th>
+                                            <th>Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var disconnection in Model.Disconnections)
+                                        {
+                                            <tr>
+                                                <td>@disconnection.Id</td>
+                                                <td>@disconnection.AcctNo</td>
+                                                <td>@disconnection.Name</td>
+                                                <td>@disconnection.Address</td>
+                                                <td>@disconnection.Balance</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="/DisconnectionPDF/DisconnectionReceivingPDF" target="_blank" id="btnReceivingGenerate" class="btn btn-primary wd-50"> <i class="fa fa-print"></i> Print Receiving Copy</a>
+                                        @* <a href="/DisconnectionPDF/DisconnectionPDF" target="_blank" id="btnGenerate" class="btn btn-primary wd-50"> <i class="fa fa-print"></i> Print Notices</a> *@
+                                        <a asp-controller="DisconnectionPDF" asp-action="DisconnectionPDF" asp-route-brgyId="@TempData["BrgyId"]" target="_blank" id="btnGenerate" class="btn btn-primary wd-50"> <i class="fa fa-print"></i> Print Notices</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
+
+<script>
+    document.getElementById('myDropdown').addEventListener('change', function () {
+        var selectedValue = this.value;
+        var link = document.getElementById('myLink');
+        link.href = '@Url.Action("ActionName", "ControllerName")?id=' + selectedValue;
+    });
+</script>

@@ -1,0 +1,482 @@
+﻿@model MWS.Web.Models.TransactionViewModel
+
+@{
+    ViewData["Title"] = Model.Customer.AcctNo;
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<script>
+    function calculatePercentage() {
+        ///Type 3 to 9
+        
+        
+        // Get the user input value
+        var total = document.getElementById("current-total").value;
+        var _consumed = document.getElementById("consumed").value;
+        var _amountPaid = document.getElementById("amount-paid");
+        var _environmentalFee = document.getElementById("env-fee");
+        var _discountSpan = document.getElementById("discount");
+        var _envFeeSpan = document.getElementById("env");
+        var _currentDiscount = document.getElementById("current-discount");
+
+        var discount = _discountSpan.innerHTML;
+        var env = _envFeeSpan.innerHTML;
+
+        console.log("Discount : " + discount)
+        console.log("Total : " + total)
+            // Check if the input is a valid number
+            if (isNaN(discount)) {
+            alert("Invalid discount.");
+            return;
+        }
+
+        if (isNaN(total)) {
+            alert("Invalid total.");
+            return;
+        }
+
+        // Get the percentage (let's say 10% for this example)
+
+        // Calculate the percentage value
+        
+        var result = parseFloat(total) * parseFloat(discount);
+        _currentDiscount.value= result.toFixed(2);
+
+        var paid = parseFloat(total) - parseFloat(result);
+        var envParse = parseFloat(env);
+
+        var consumed = parseFloat(_consumed);
+        var env_fee = consumed * envParse;
+        console.log("ENV : " + env_fee);
+        var toPay = paid + env_fee;
+
+        _environmentalFee.value = env_fee.toFixed(2);
+        _amountPaid.value = toPay.toFixed(2);
+        //console.log("Balance : " + result)
+        // Display the result
+        //document.getElementById("result").innerText = "10% of " + inputValue + " is: " + result;
+        var selectedValue = document.getElementById('t-type').value;
+        if(selectedValue == "3" || selectedValue == "4" || selectedValue == "5" || selectedValue == "6" || selectedValue == "7"){
+            getFee(selectedValue);
+        }
+        else if(selectedValue == "1" || selectedValue == "2"){
+
+        }
+
+    }
+
+    
+
+   
+</script>
+<div>
+    <form method="post" action="">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Account - Charges</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/Payments/Index">Payments</a></li>
+                            <li class="breadcrumb-item active">Charges</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <section id="consumer-payment-details" class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">ACCOUNT INFORMATION</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.AcctNo"></label>
+                                            <input type="text" asp-for="Customer.AcctNo" class="form-control" id="AcctNo" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.AcctType"></label>
+                                            <input type="text" asp-for="Customer.AcctType" class="form-control" id="AcctType" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.MeterNo"></label>
+                                            <input type="text" asp-for="Customer.MeterNo" class="form-control" id="MeterNo" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <input type="hidden" asp-for="Customer.Id">
+                                    <input type="hidden" asp-for="Customer.Barangay">
+                                    <input type="hidden" asp-for="Customer.Street">
+                                    <input type="hidden" asp-for="Customer.UnitNo">
+                                    
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Lname"></label>
+                                            <input type="text" asp-for="Customer.Lname" class="form-control" id="Lname" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Fname"></label>
+                                            <input type="text" asp-for="Customer.Fname" class="form-control" id="Mi" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Mi"></label>
+                                            <input type="text" asp-for="Customer.Mi" class="form-control" id="Mi" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Senior"></label>
+                                            @if(Model.Customer.Senior == false)
+                                            {
+                                                <input type="text" class="form-control" value="NO" readonly>
+                                            }
+                                            else
+                                            {
+                                                <input type="text" class="form-control" value="YES" readonly>
+                                            }
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label asp-for="Address"></label>
+                                            <input type="text" asp-for="Address" class="form-control" id="Address" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Status"></label>
+                                            <input style="font-weight: bold;" type="text" class="form-control border border-danger" asp-for="Customer.Status" id="Status" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="consumer-charges" class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">CHARGES</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Water Bill No.</label>
+                                            <input type="text" asp-for="WaterBillNo" class="form-control" id="waterbill-no" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Consumed (cu. m)</label>
+                                            <input type="text" asp-for="Consumed" class="form-control" id="consumed" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Transaction Type</label>
+                                            <select id="t-type" asp-for="Type" name="Type" class="form-control" onchange="handleDropdownChange()">
+                                                <option value="0">CHOOSE TRANSACTION</option>
+                                                <option value="1">WATER BILL PAYMENT</option>
+                                                <option value="2">WATER BILL ISSUE</option>
+                                                <option value="3">NEW CONNECTION</option>
+                                                <option value="4">RECONNECTION FEE</option>
+                                                <option value="5">CONNECTION FEE</option>
+                                                <option value="6">SURCHARGE</option>
+                                                <option value="7">TRANSFER CHARGE</option>
+                                                <option value="8">MATERIALS</option>
+                                                <option value="9">OTHERS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Month of</label>
+                                            <select asp-for="Month" class="form-control">
+                                                <option>January</option>
+                                                <option>February</option>
+                                                <option>March</option>
+                                                <option>April</option>
+                                                <option>May</option>
+                                                <option>June</option>
+                                                <option>July</option>
+                                                <option>August</option>
+                                                <option>September</option>
+                                                <option>October</option>
+                                                <option>November</option>
+                                                <option>December</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Year</label>
+                                            <select asp-for="Year" class="form-control" asp-items="@(new SelectList(ViewBag.Years))"></select>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="row">
+                                    
+                                    
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label  id="lbl-current-total">Current Total Balance:</label>
+                                            <input style="font-weight: bold;" type="text" asp-for="CurrentTotalBalance" class="form-control border border-danger" id="current-total" onchange="calculatePercentage()">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            @if (Model.Customer.Senior == false)
+                                            {
+                                                <label id="lbl-discount">Discount: <span id="discount">@TempData["Discount"]</span></label>
+                                            }
+                                            else
+                                            {
+                                                <label id="lbl-discount">Senior Discount: <span id="discount">@TempData["Discount"]</span></label>
+                                            }
+                                            <input style="font-weight: bold;" type="text" value=0.00 class="form-control border border-success" id="current-discount" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label id="lbl-env-fee">Environmental Fee : <span id="env">@TempData["EnvFee"]</span></label>
+                                            <input type="text" class="form-control" style="font-weight: bold;" value=0.00 id="env-fee" required onchange="calculatePercentage()">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>OR No.</label>
+                                            <input type="text" asp-for="OfficialReceipt" class="form-control" id="orno" onchange="calculatePercentage();" required>
+                                            <p style="color:red">@TempData["OR"]</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Amount Paid:</label>
+                                            <input type="text" asp-for="AmountPaid" class="form-control" style="font-weight: bold;" value=0.00 id="amount-paid" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="padding-top: 32px">
+                                        <div class="form-group">
+                                            <a id="btn-save" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-save"></i> SAVE</a>
+                                            @*<button target="_blank" asp-action="PrintORPDF" type="submit" id="btn-print-or" class="btn btn-primary"> <i class="fa fa-print"></i> PRINT OR</button>*@
+                                            <button target="_blank" asp-action="PrintORMatrix" type="submit" id="btn-print-or" class="btn btn-primary"> <i class="fa fa-print"></i> PRINT OR</button>
+                                            <div class="modal fade" id="modal-default">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 id="model-title" class="modal-title"><span id="span-modal-default">Daily Transactions</span></h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Are you sure you want to record the payment for this account?</p>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> NO</button>
+
+                                                            <button type="submit" asp-action="Update" class="btn btn-primary"> <i class="fa fa-check"></i> YES</button>
+                                                         
+                                                            <input type="hidden" asp-for="Customer.Barangay" />
+                                                            <input type="hidden" asp-for="Customer.Street" />
+                                                            <input type="hidden" asp-for="Customer.Status" />
+                                                            <input type="hidden" asp-for="Customer.Senior" id="senior" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button onclick="_close()" class="btn btn-danger"><i class="fa fa-window-close"></i> CLOSE</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">DAILY TRANSACTIONS</h3>
+                            </div>
+                            <div class="card-body table-responsive p-0" style="height: 555px;">
+                                <div class="card-body">
+                                    <table id="example3" class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Official Receipt</th>
+                                                <th>Transaction Date</th>
+                                                <th>Paid By</th>
+                                                <th>Particulars</th>
+                                                <th>Amount</th>
+                                                <th>Account Number</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var dailyTran in Model.DailyTransList)
+                                            {
+                                                <tr>
+                                                    <td>@dailyTran.Or</td>
+                                                    <td>@dailyTran.TransDate</td>
+                                                    <td>@dailyTran.Payor</td>
+                                                    <td>@dailyTran.Particulars</td>
+                                                    <td>@(String.Format("{0:#.00}", dailyTran.Amount))</td>
+                                                    <td>@dailyTran.AccountNo</td>
+                                                    <td><a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-default"> <i class="fa fa-trash"></i> CANCEL</a></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
+<script>
+    function _close() {
+        window.close();
+    }
+    function handleDropdownChange() {
+        var selectedValue = document.getElementById('t-type').value;
+
+
+        // Hide all input boxes initially
+        var orNo = document.getElementById('or-no');
+        var currentTotal = document.getElementById('current-total');
+        var currentDiscount = document.getElementById('current-discount');
+        var envFee = document.getElementById('env-fee');
+        var amountPaid = document.getElementById('amount-paid');
+        //Label
+        var _currentTotal = document.getElementById('lbl-current-total');
+        var _currentDiscount = document.getElementById('lbl-discount');
+        var _envFee = document.getElementById('lbl-env-fee');
+
+
+        console.log("Selected : " + selectedValue)
+
+        if (selectedValue == "1") {
+            currentTotal.style.display = 'block';
+            currentDiscount.style.display = 'block';
+            envFee.style.display = 'block';
+
+            _currentTotal.style.display = 'block';
+            _currentDiscount.style.display = 'block';
+            _envFee.style.display = 'block';
+        }
+        else {
+            currentTotal.style.display = 'none';
+            currentDiscount.style.display = 'none';
+            envFee.style.display = 'none';
+
+            _currentTotal.style.display = 'none';
+            _currentDiscount.style.display = 'none';
+            _envFee.style.display = 'none';
+        }
+        getFee(selectedValue);
+    }
+
+    function changeElementTextById(elementId, newText) {
+        $("#" + elementId).text("Transaction: " + newText);
+    }
+
+    $(document).ready(function () {
+        $("#btn-save").click(function () {
+            var selectedValue = $('#t-type').val();
+            var selectedText = $("#t-type option:selected").text();
+            changeElementTextById("span-modal-default", selectedText);
+        });
+
+        // $('#span-modal-default').on('show.bs.modal', function (e) {
+        //     var selectedText = $('#t-type').val();
+        //     console.log("select text : " + selectedText);
+        // });
+
+    });
+
+    function getFee(selectedValue) {
+        // Make an AJAX request
+        $.ajax({
+            url: '/Payments/GetFee',
+            type: 'GET',
+            data: { selectedValue: selectedValue },
+            success: function (data) {
+                // Handle success response
+                
+                if(data != "N"){
+                    $('#amount-paid').val(data);
+                    console.log('AJAX request successful');
+                }
+            },
+            error: function (xhr, status, error) {
+                // Handle error response
+                console.error('AJAX request failed');
+            }
+        });
+    }
+</script>
+

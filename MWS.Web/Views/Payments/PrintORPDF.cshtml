@@ -1,0 +1,68 @@
+﻿@model MWS.Web.Models.CustomersSummary
+
+@{
+    ViewData["Title"] = string.Format("{0} {1}", Model.AcctNo, "Official Receipt");
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/dist/css/report-layout-pdf.css" type="text/css">
+    <script src="~/dist/js/waterbill-print-pdf.js"></script>
+    <script src="~/dist/js/html2pdf.bundle.js"></script>
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script> *@
+    <style type="text/css"></style>
+</head>
+<a onclick="myAlert()" id="pdfGenerate">Please wait while PDF is still downloading...</a>
+
+<section class="pdfGenerate">
+
+    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+    <table id="waterbill" style="border-collapse:collapse;margin-left:5.565pt" cellspacing="0">
+        <tr style="height:135pt">
+
+            <td style="width:288pt;border-top-style:solid;border-top-width:3pt;border-top-color:#808080;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="6">
+                <img src="~/dist/img/mws_seal.png" style="padding-left:15px;padding-top:2px;WIDTH: 80px;HEIGHT: 80px;float:left;" class="mws-seal">
+                <p class="s1" style="padding-left: 85pt;text-indent: 0pt;line-height: 16pt;text-align: left;">MAGALLANES WATER SYSTEM</p>
+                <p class="s2" style="padding-top: 3pt;padding-left: 93pt;padding-right: 15pt;text-indent: 23pt;line-height: 131%;text-align: left;">Municipality of Magallanes,Cavite <span style=" color: #3F3F3F;">Contact Nos: (09958248272) (00000000000)</span></p>
+                <p class="s2" style="padding-bottom: 3pt;padding-left: 91pt;text-indent: 0pt;text-align: left;">WATER BILL NO:<span class="s4">   </span><span class="s5"><u>@Model.WaterBillNo</u></span></p>
+                <p style="padding-left: 158pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s6" style="padding-top: 6pt;padding-bottom: 3pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Customer:  <span style="padding-left: 10px;" class="s3"><u>@Model.Name  </u></span>
+                <p class="s7" style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;"> </p>
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Account No:  <span class="s9"><u>@Model.AcctNo     </u>               </span>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s6" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Address:   <span style="padding-left: 17px;" class="s3"><u>@Model.Address</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Meter No:<span class="s10">  </span><span style="padding-left: 10pt;" class="s9"><u>@Model.MeterNo</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Date:<span class="s10">  </span><span style="padding-left: 27pt;" class="s9"><u>@Model.Month</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Amount Paid:<span class="s10">  </span><span class="s9"><u>@Model.AmountPaid</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s11" style="padding-right: 12pt;text-indent: 0pt;line-height: 7pt;text-align: right;"> &#160;</p>
+            </td>
+            <td style="width:288pt;border-top-style:solid;border-top-width:3pt;border-top-color:#808080;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="6">
+                <img src="~/dist/img/mws_seal.png" style="padding-left:15px;padding-top:2px;WIDTH: 80px;HEIGHT: 80px;float:left;" class="mws-seal">
+                <p class="s1" style="padding-left: 85pt;text-indent: 0pt;line-height: 16pt;text-align: left;">MAGALLANES WATER SYSTEM</p>
+                <p class="s2" style="padding-top: 3pt;padding-left: 93pt;padding-right: 15pt;text-indent: 23pt;line-height: 131%;text-align: left;">Municipality of Magallanes,Cavite <span style=" color: #3F3F3F;">Contact Nos: (09958248272) (00000000000)</span></p>
+                <p class="s2" style="padding-bottom: 3pt;padding-left: 91pt;text-indent: 0pt;text-align: left;">WATER BILL NO:<span class="s4">  </span><span class="s5"><u>@Model.WaterBillNo</u></span></p>
+                <p style="padding-left: 158pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s6" style="padding-top: 6pt;padding-bottom: 3pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Customer:  <span style="padding-left: 10px;" class="s3"><u>@Model.Name  </u></span>
+                <p class="s7" style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;"> </p>
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Account No:  <span class="s9"><u>@Model.AcctNo     </u>               </span> 
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s6" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Address:   <span style="padding-left: 17px;" class="s3"><u>@Model.Address</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Meter No:<span class="s10">  </span><span style="padding-left: 10pt;" class="s9"><u>@Model.MeterNo</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Date:<span class="s10">  </span><span style="padding-left: 27pt;" class="s9"><u>@Model.Month</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s8" style="padding-bottom: 2pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Amount Paid:<span class="s10">  </span><span class="s9"><u>@Model.AmountPaid</u></span></p>
+                <p style="padding-left: 57pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+                <p class="s11" style="padding-right: 12pt;text-indent: 0pt;line-height: 7pt;text-align: right;">( DUPLICATE COPY )</p>
+            </td>
+        </tr>
+    </table>
+
+
+</section>

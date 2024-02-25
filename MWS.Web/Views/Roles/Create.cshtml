@@ -1,0 +1,86 @@
+﻿@model MWS.Web.Models.ProjectRole
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>New Role</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/Roles/Index">Roles List</a></li>
+                        <li class="breadcrumb-item active">New Role</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">CREATE ROLE</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="post" asp-action="Create">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <form asp-action="Create">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="form-group">
+                                                <label asp-for="RoleName" class="control-label"></label>
+                                                <input asp-for="RoleName" class="form-control" />
+                                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer">
+                                    <button asp-action="Index" class="btn btn-danger"><i class="fa fa-window-close"></i> CLOSE</button>
+                                    <a class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-save"></i> SAVE</a>
+                                    <div class="modal fade" id="modal-default">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Add New Role</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to add new role?</p>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> CANCEL</button>
+
+                                                    <button type="submit" value="Create" class="btn btn-primary"><i class="fa fa-check"></i> YES</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

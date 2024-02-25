@@ -1,0 +1,355 @@
+﻿@model MWS.Web.Models.ConsumerSummaryViewModel
+
+@{
+    ViewData["Title"] = Model.Customer.AcctNo;
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- Bootstrap Datepicker CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+<!-- Bootstrap Datepicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
+<div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Account Information</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/ConsumersSummary/Index">Consumer Summary of Transactions</a></li>
+                        <li class="breadcrumb-item active">Account Information</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section id="consumer-summary-details" class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">ACCOUNT INFORMATION</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                @*  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                                </button>*@
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <div class="card-body">
+                            <form method="post" asp-action="Update">
+                                <div class="row">
+                                    <input type="hidden" asp-for="Customer.Id">
+                                    <input type="hidden" asp-for="Customer.Barangay">
+                                    <input type="hidden" asp-for="Customer.Street">
+                                    <input type="hidden" asp-for="Customer.UnitNo">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Lname"></label>
+                                            <input type="text" asp-for="Customer.Lname" class="form-control" id="Lname" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Fname"></label>
+                                            <input type="text" asp-for="Customer.Fname" class="form-control" id="Mi" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Mi"></label>
+                                            <input type="text" asp-for="Customer.Mi" class="form-control" id="Mi" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label asp-for="Address"></label>
+                                            <input type="text" asp-for="Address" class="form-control" id="Address" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Status"></label>
+                                            <input type="text" asp-for="Customer.Status" class="form-control" id="Status" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.AcctNo"></label>
+                                            <input type="text" asp-for="Customer.AcctNo" class="form-control" id="AcctNo" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.AcctType"></label>
+                                            <input type="text" asp-for="Customer.AcctType" class="form-control" id="AcctType" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.MeterNo"></label>
+                                            <input type="text" asp-for="Customer.MeterNo" class="form-control" id="MeterNo">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="padding-top: 32px">
+                                        <div class="form-group">
+                                            <a class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-save"></i> UPDATE</a>
+                                            <div class="modal fade" id="modal-default">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Update Meter Number</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Are you sure you want to update meter number?</p>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> Cancel</button>
+
+                                                            <button type="submit" class="btn btn-primary"> <i class="fa fa-check"></i> OK</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-secondary">
+                        <div class="row">
+                            
+                        </div>
+                        <div class="card-header">
+                            <h3 class="card-title">SUMMARY OF TRANSACTIONS</h3>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Select Date Range</h4>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                <label for="fromDate">From:</label>
+                                <input type="text" class="form-control" id="fromDate" name="fromDate">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                <label for="toDate">To:</label>
+                                <input type="text" class="form-control" id="toDate" name="toDate">
+                            </div>
+                            </div>
+
+                            
+                            <button type="submit" class="btn btn-primary">Show</button>
+                        </div>
+                        
+                        <div class="card-body table-responsive p-0" style="height: 340px;">
+                            <table class="table table-head-fixed text-nowrap table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Trans No.</th>
+                                        <th>Reading Date</th>
+                                        <th>Reading (cu. m)</th>
+                                        <th>Update Reading</th>
+                                        <th>Action</th>
+                                        <th>Type</th>
+                                        <th>Month</th>
+                                        <th>Bill No.</th>
+                                        
+                                        <th>Consumption</th>
+                                        <th>Amount Billed</th>
+                                        <th>Amount Paid</th>
+                                        <th>Payments Receipt</th>
+                                        <th>Date Paid</th>
+                                        
+                                        <th>Previous Date</th>
+                                        
+                                        <th>Due Date</th>
+                                        <th>Current Bill</th>
+                                        <th>Others</th>
+                                        <th>Previous Balance</th>
+                                        <th>Balance</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <form method="post" asp-action="UpdateMeterReading">
+                                        @foreach (var summary in Model.CustomersSummaries.OrderByDescending(c => c.Id))
+                                        {
+                                        <tr>
+                                            <td>@summary.Id</td>
+                                            <td>
+
+                                                    @if (summary.PresDate2.ToShortDateString().ToString() == "01/01/1900")
+                                                    {
+                                                    <span>NA</span>
+                                                    }
+                                                    else if (summary.PresDate2.ToShortDateString().ToString() == "19/10/1894")
+                                                    {
+                                                    <span>NA</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        @summary.PresDate2.ToShortDateString()
+                                                    }
+                                            </td>
+                                            <td>@Convert.ToInt32(@summary.Reading2)</td>
+                                            <td>
+                                                    @if (Model.LastTransactionNo == @summary.Id)
+                                                    {
+                                                    <div>
+                                                        <input type="text" asp-for="@summary.Reading2" name="update-meter" class="form-control text-right-align" id="update-meter" />
+                                                        <input type="hidden" name="update-transno" class="form-control" id="update-transno" value=@summary.Id>
+                                                    </div>
+                                                    }
+                                            </td>
+                                            <td>
+                                                    @if (Model.LastTransactionNo == @summary.Id)
+                                                    {
+                                                    <button class="btn btn-info btn-xs" name="Command" value="save" type="submit">SAVE</button>
+                                                    <a target="_blank" asp-controller="ConsumersSummary" asp-action="ReprintWaterBillPDF" asp-route-acctNo=@summary.AcctNo id="btn-reprint" class="btn btn-info btn-xs"> <i class="fa fa-print"></i> REPRINT </a>
+                                                        @*<a target="_blank asp-controller="ConsumersSummary" asp-action="ReprintWaterBillPDF" asp-route-id=@summary.Id target="_blank" id="btn-reprint" class="btn btn-info btn-xs"> <i class="fa fa-print"></i> REPRINT WATER BILL</a>*@
+
+                                                    }
+                                            </td>
+                                            
+                                            <td>@summary.Type</td>
+                                            <td>@summary.Month</td>
+                                            <td>@summary.WaterBillNo</td>
+                                            
+                                            <td class="text-right-align">@summary.Consumed2</td>
+                                            <td class="text-right-align">@summary.AmountBilled2</td>
+                                            <td class="text-right-align">@summary.AmountPaid2</td>
+                                            <td>@summary.OfficialReceipt</td>
+                                            <td>
+                                                @if (summary.DatePaid2.ToShortDateString().ToString() == "01/01/1900")
+                                                {
+                                                        <span>NA</span>
+                                                }
+                                                    else if (summary.DatePaid2.ToShortDateString().ToString() == "19/10/1894")
+                                                {
+                                                    <span>NA</span>
+                                                }
+                                                else
+                                                {
+                                                  @summary.DatePaid2.ToShortDateString()
+                                                }
+                                            </td>
+                                            
+                                            <td>
+
+                                                    @if (summary.PrevDate2.ToShortDateString().ToString() == "01/01/1900")
+                                                    {
+                                                    <span>NA</span>
+                                                    }
+                                                    else if (summary.PrevDate2.ToShortDateString().ToString() == "19/10/1894")
+                                                    {
+                                                    <span>NA</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        @summary.PrevDate2.ToShortDateString()
+                                                    }
+                                            </td>
+                                            
+                                            <td>
+
+                                                    @if (summary.DueDate2.ToShortDateString().ToString() == "01/01/1900")
+                                                    {
+                                                    <span>NA</span>
+                                                    }
+                                                    else if (summary.DueDate2.ToShortDateString().ToString() == "19/10/1894")
+                                                    {
+                                                    <span>NA</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        @summary.DueDate2.ToShortDateString()
+                                                    }
+                                            </td>
+                                            <td class="text-right-align">@summary.CurrentBill2</td>
+                                            <td class="text-right-align">@summary.Others</td>
+                                            <td class="text-right-align">@summary.PrevBal2</td>
+                                            <td class="text-right-align">@summary.Balance2</td>
+                                            
+                                        </tr>
+                                        }
+                                    </form>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            
+        </div>
+        <footer>
+            <div class="row">
+                <div class="col-md-12">
+                    <button asp-action="Index" class="btn btn-danger"><i class="fa fa-window-close"></i> CLOSE</button>
+                    <a class="btn btn-primary wd-50" target="_blank" asp-controller="ConsumersSummary" asp-action="PrintSummaryPDF" asp-route-acctNo=@Model.Customer.AcctNo> <i class="fa fa-print"></i> PRINT SUMMARY</a>
+                    <a class="btn btn-primary wd-50" asp-controller="ConsumersSummary" asp-action="AddFee" asp-route-id="@Model.Customer.Id"> <i class="fa fa-plus-square"></i> ADD FEES</a>
+                </div>
+
+            </div>
+        </footer>
+    </section>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#fromDate').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        });
+        $('#toDate').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        });
+    });
+</script>

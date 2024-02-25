@@ -1,0 +1,168 @@
+﻿@font-face {
+    font-family: 'Roboto';
+    src: url(~/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+}
+
+.s1 {
+    color: black;
+    font-family: Calibri, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 15pt;
+}
+
+.s2 {
+    color: black;
+    font-family: Calibri, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 9pt;
+}
+
+.s3 {
+    color: #3F3F3F;
+    font-family: Calibri, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 9pt;
+}
+
+.s4 {
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9pt;
+}
+
+.s5 {
+    color: #BF0000;
+    font-family: Tahoma, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+.s6 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+    vertical-align: 1pt;
+}
+
+.s7 {
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 1pt;
+}
+
+.s8 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+.s9 {
+    color: #3F3F3F;
+    font-family: Calibri, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 9pt;
+    vertical-align: -1pt;
+}
+
+.s10 {
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+.s11 {
+    color: #3F3F3F;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+.s12 {
+    color: #800000;
+    font-family: Calibri, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+.s13 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+.s14 {
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+}
+
+.s15 {
+    color: black;
+    font-family: Calibri, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 9pt;
+    vertical-align: -1pt;
+}
+
+table, tbody {
+    vertical-align: top;
+    overflow: visible;
+}
+
+
+.pdf-section {
+    display: none;
+}
+
+
+.transparent {
+    background: rgba(76, 175, 80, 0.6);
+}
+
+img {
+    mix-blend-mode: multiply;
+}

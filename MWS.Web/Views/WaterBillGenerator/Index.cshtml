@@ -1,0 +1,93 @@
+﻿@model MWS.Web.Models.CustomerViewModel
+
+@{
+    ViewData["Title"] = "Water Bill Generator";
+    Layout = "_Layout";
+}
+
+@*<div id="coverScreen" class="LockOn">
+</div>*@
+<div class="content-wrapper">
+    <form method="post">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Consumer List</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                            <li class="breadcrumb-item active">Water Bill Generator</li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @* <div class="overlay-wrapper">
+        <div class="overlay"><i class="fas fa-3x fa-sync-alt fa-spin"></i><div class="text-bold pt-2">Loading...</div></div>
+        </div>*@
+        <section id="water-bill-generator" class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="submit" value="Submit" class="btn btn-primary"> <i class="fa fa-search"></i> Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table id="example3" data-widget="expandable-table" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Account No.</th>
+                                            <th>Meter No.</th>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
+                                            <th>Address</th>
+                                            <th>Account Type</th>
+                                            <th>Senior</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var customer in Model.Customers)
+                                        {
+                                            <tr>
+                                                <td>@customer.AcctNo</td>
+                                                <td>@customer.MeterNo</td>
+                                                <td>@customer.Lname</td>
+                                                <td> @customer.Fname</td>
+                                                <td>@(String.Format("{0} {1} {2}", customer.Barangay, customer.UnitNo, customer.Street))</td>
+                                                <td>@customer.AcctType</td>
+                                                <td>
+                                                    <input id="@customer.Senior" type="checkbox" name="Senior" value="@customer.Senior" checked="@customer.Senior" readonly />
+                                                </td>
+                                             @*   <td>
+                                                    <a class="btn btn-info btn-xs" asp-controller="WaterBillGenerator" asp-action="Update" asp-route-id="@customer.Id"> <i class="fa fa-check-square"></i> VIEW</a>
+                                                </td>*@
+                                                <td>
+                                                    <a href="@Url.Action("Update", "WaterBillGenerator", new { @customer.Id})" class="btn btn-info btn-xs" target="_blank"> <i class="fa fa-check-square"></i> VIEW</a>
+                                                    <a href="@Url.Action("ReprintWaterBillPDF", "ConsumersSummary", new { acctNo = @customer.AcctNo})" class="btn btn-info btn-xs" target="_blank"> <i class="fa fa-check-square"></i> PRINT</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>

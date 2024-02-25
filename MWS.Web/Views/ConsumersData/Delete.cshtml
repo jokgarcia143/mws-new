@@ -1,0 +1,144 @@
+﻿@model MWS.Web.Models.Customer
+
+@{
+    ViewData["Title"] = "Delete";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+<div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>New Consumer</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/ConsumersData/Index">Consumer List</a></li>
+                        <li class="breadcrumb-item active">Delete Consumer</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Account Information</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="post" asp-action="Delete">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Lname"></label>
+                                            <input type="text" asp-for="Lname" class="form-control" id="inputLastName" placeholder="Last Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Fname"></label>
+                                            <input type="text" asp-for="Fname" class="form-control" id="inputFirstName" placeholder="First Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Mi"></label>
+                                            <input type="text" asp-for="Mi" class="form-control" id="inputMiddleName" placeholder="Middle Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="UnitNo"></label>
+                                            <input type="text" asp-for="UnitNo" class="form-control" id="inputUnitNo" placeholder="Unit #">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label asp-for="Street"></label>
+                                            <input type="text" asp-for="Street" class="form-control" id="inputStreetName" placeholder="Street Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label asp-for="Barangay"></label>
+                                            <select asp-for="Barangay" class="form-control" asp-items="@(new SelectList(ViewBag.Barangay,"BrgyId", "Brgy"))"></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="AcctType"></label>
+                                            <select asp-for="AcctType" class="form-control">
+                                                <option>Residential</option>
+                                                <option>Government</option>
+                                                <option>Commercial</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="AcctNo"></label>
+                                            <input type="text" asp-for="AcctNo" class="form-control" id="inputAcctNo" placeholder="Account Number" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="MeterNo"></label>
+                                            <input type="text" asp-for="MeterNo" class="form-control" id="inputMeterNo" placeholder="Meter Number">
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Status"></label>
+                                            <input type="text" asp-for="Status" class="form-control" id="inputStatus" placeholder="Status" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" type="checkbox">
+                                                @* <input id="@Model.Senior" type="checkbox" name="Fruit" value="@Model.Senior" checked="@Model.Senior"/>*@
+                                                <label asp-for="Senior" class="custom-control-label">Senior Citizen</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button data-toggle="modal" data-target="#modal-default" class="btn btn-primary">Delete</button>
+                                    <button asp-action="Index" class="btn btn-primary">Close</button>
+                                </div>
+
+                                <div class="modal fade" id="modal-default">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Delete Consumer</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete selected consumer?</p>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <form method="post">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                    <a type="submit" class="btn btn-primary toastrDeleteSuccess" asp-controller="ConsumersData" asp-action="Delete">Yes</a>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                    <!-- general form elements -->
+
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </section>
+
+</div>

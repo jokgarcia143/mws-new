@@ -1,0 +1,366 @@
+﻿@model MWS.Web.Models.WaterBillGeneratorViewModel
+
+@{
+    ViewData["Title"] = Model.Customer.AcctNo;
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+<div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Water Bill</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/WaterBillGenerator/Index">Water Bill Generator</a></li>
+                        <li class="breadcrumb-item active">Water Bill</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <form method="post" asp-action="Update">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">ACCOUNT INFORMATION</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Lname"></label>
+                                            <input type="text" asp-for="Customer.Lname" class="form-control" id="Lname" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Fname"></label>
+                                            <input type="text" asp-for="Customer.Fname" class="form-control" id="Fname" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.Mi"></label>
+                                            <input type="text" asp-for="Customer.Mi" class="form-control" id="Mi" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label asp-for="Address"></label>
+                                            <input type="text" asp-for="Address" class="form-control" id="Address" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.MeterNo"></label>
+                                            <input type="text" asp-for="Customer.MeterNo" class="form-control" id="MeterNo" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.AcctNo"></label>
+                                            <input type="text" asp-for="Customer.AcctNo" class="form-control" id="AcctNo" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Customer.AcctType"></label>
+                                            <input type="text" asp-for="Customer.AcctType" class="form-control" id="AcctType" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input asp-for="Customer.Senior" class="custom-control-input" type="checkbox" name="Senior" />
+                                                <label asp-for="Customer.Senior" class="custom-control-label">Senior Citizen</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">WATER BILL DETAILS</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="WaterBill.PrevDate2"></label>
+                                            <input type="text" asp-for="WaterBill.PrevDate2" class="form-control" id="inputPrevDate" placeholder="Previous Date" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="WaterBill.PrevRead2"></label>
+                                            <input type="text" asp-for="WaterBill.PrevRead2" class="form-control" id="inputPrevRead" placeholder="Previous Reading" readonly>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Current Date</label>
+                                            <input asp-for="CurrDate" type="text" id="datepicker" class="form-control" readonly />
+                                            @*   <span asp-validation-for="CurrDate" class="text-danger"></span>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Reading">Current Reading &#13221;</label>
+                                            <input type="text" asp-for="Reading" class="form-control" id="inputPresRead" placeholder="0" onchange="computeWaterBillCharges()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Consumed"> Consumed &#13221;</label>
+                                            <input type="text" asp-for="Consumed" class="form-control" id="inputConsumed" placeholder="0" readonly>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">WATER BILL CHARGES</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="WaterBill.PrevBal2">Previous Balance &#x20B1;</label>
+                                            <input type="text" asp-for="WaterBill.PrevBal2" class="form-control" id="inputPrevBal" placeholder="0.00" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Wbcontrol.No"></label>
+                                            <input asp-for="Wbcontrol.No" type="text" class="form-control" id="inputWaterBillNo" value="@TempData["WaterBillNo"]" placeholder="0" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Current Billing &#8369;</label>
+                                            <input type="text" asp-for="CurrentBill" class="form-control" id="inputCurrentBilling" placeholder="0.00" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Total Amount &#x20B1;</label>
+                                            <input style="font-weight: bold;" asp-for="Total" type="text" class="form-control border border-danger" id="inputTotal" placeholder="0.00" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Other Charges / Penalty &#x20B1;</label>
+                                            <input type="text" asp-for="Others" class="form-control" id="inputPenalty" placeholder="0.00" onchange="computeWaterBillCharges()">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="padding-top: 32px">
+                                        <div class="form-group">
+                                            <button onclick="_close()" class="btn btn-danger"><i class="fa fa-window-close"></i> CLOSE</button>
+                                            @*<button asp-action="Index" class="btn btn-danger"><i class="fa fa-window-close"></i> CLOSE</button>*@
+                                            <a class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-save"></i> SAVE</a>
+                                            <div class="modal fade" id="modal-default">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Create Water Bill Charge</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Are you sure you want to record the water bill consumption for this account?</p>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> NO</button>
+                                                            <form method="post">
+                                                                <button type="submit" class="btn btn-primary"> <i class="fa fa-check"></i> YES</button>
+                                                            </form>
+                                                            <input type="hidden" asp-for="WaterBill.AcctNo" />
+                                                            <input type="hidden" asp-for="Customer.Barangay" />
+                                                            <input type="hidden" asp-for="Customer.Street" />
+                                                            <input type="hidden" asp-for="Customer.Status" />
+                                                            <input type="hidden" asp-for="Customer.Senior" id="senior" />
+                                                            <input type="hidden" asp-for="Discount" id="discount" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </section>
+</div>
+<input type="hidden" value="@ViewBag.Mrate" id="mrate" />
+<script>
+    function computeWaterBillCharges() {
+        let consumed = document.getElementById("inputConsumed");
+        let prevRead = document.getElementById('inputPrevRead').value;
+        let presRead = document.getElementById('inputPresRead').value;
+        consumed.value = parseFloat(presRead) - parseFloat(prevRead);
+        let total = document.getElementById('inputTotal');
+        let currentBilling = document.getElementById('inputCurrentBilling');
+        let prevBal = document.getElementById('inputPrevBal').value;
+        let penalty = document.getElementById('inputPenalty').value;
+        if (prevBal == "NA" || prevBal == "") {
+            prevBal = 0;
+        }
+        if (penalty == "") {
+            penalty = 0;
+        }
+        let senior = document.getElementById('senior');
+        let base = parseInt(@ViewBag.Minimum)
+        let rate = 0;
+        let remainingConsumed = consumed.value - 10;
+        let subtotal = base;
+
+        if (consumed.value > 10 && consumed.value < 31) {
+            rate = parseInt(@ViewBag.First) * remainingConsumed;
+            subtotal = subtotal + rate;
+        } else if (consumed.value > 30) {
+            rate = parseInt(@ViewBag.First) * 20;
+            remainingConsumed = consumed.value - 30;
+            subtotal = subtotal + rate;
+        }
+
+        if (consumed.value > 30 && consumed.value < 51) {
+            rate = parseInt(@ViewBag.Second) * remainingConsumed;
+            subtotal = subtotal + rate;
+        } else if (consumed.value > 50) {
+            rate = parseInt(@ViewBag.Second) * 20;
+            remainingConsumed = consumed.value - 50;
+            subtotal = subtotal + rate;
+        }
+
+        if (consumed.value > 50 && consumed.value < 71) {
+            rate = parseInt(@ViewBag.Third) * remainingConsumed;
+            subtotal = subtotal + rate;
+        } else if (consumed.value > 70) {
+            rate = parseInt(@ViewBag.Third) * 20;
+            remainingConsumed = consumed.value - 70;
+            subtotal = subtotal + rate;
+        }
+
+        if (consumed.value > 70 && consumed.value < 91) {
+            rate = parseInt(@ViewBag.Fourth) * remainingConsumed;
+            subtotal = subtotal + rate;
+        } else if (consumed.value > 90) {
+            rate = parseInt(@ViewBag.Fourth) * 20;
+            remainingConsumed = consumed.value - 90;
+            subtotal = subtotal + rate;
+        }
+
+        if (consumed.value > 90 && consumed.value < 111) {
+            rate = parseInt(@ViewBag.Fourth) * remainingConsumed;
+            subtotal = subtotal + rate;
+        } else if (consumed.value > 110) {
+            rate = parseInt(@ViewBag.Fifth) * 20;
+            remainingConsumed = consumed.value - 110;
+            subtotal = subtotal + rate;
+        }
+
+        if (consumed.value > 110 && consumed.value < 131) {
+            rate = parseInt(@ViewBag.Sixth) * remainingConsumed;
+            subtotal = subtotal + rate;
+        } else if (consumed.value > 130) {
+            rate = parseInt(@ViewBag.Sixth) * 20;
+            remainingConsumed = consumed.value - 130;
+            subtotal = subtotal + rate;
+        }
+
+        if (consumed.value > 130 && consumed.value < 151) {
+            rate = parseInt(@ViewBag.Seventh) * remainingConsumed;
+            subtotal = subtotal + rate;
+        } else if (consumed.value > 150) {
+            rate = parseInt(@ViewBag.Seventh) * 20;
+            remainingConsumed = consumed.value - 150;
+            subtotal = subtotal + rate;
+        }
+
+        if (consumed.value > 150 && consumed.value < 171) {
+            rate = parseInt(@ViewBag.Eighth) * remainingConsumed;
+            subtotal = subtotal + rate;
+        } else if (consumed.value > 170) {
+            rate = parseInt(@ViewBag.Eighth) * 20;
+            remainingConsumed = consumed.value - 170;
+            subtotal = subtotal + rate;
+        }
+
+        if (consumed.value > 170 && consumed.value < 190) {
+            rate = parseInt(@ViewBag.Ninth) * remainingConsumed;
+            subtotal = subtotal + rate;
+        } else if (consumed.value > 190) {
+            rate = parseInt(@ViewBag.Ninth) * 20;
+            remainingConsumed = consumed.value - 190;
+            subtotal = subtotal + rate;
+        }
+
+        if (consumed.value > 190) {
+            rate = parseInt(@ViewBag.Tenth) * remainingConsumed;          
+            subtotal = subtotal + rate;
+        }
+      
+        if (senior.value == 'True') {
+            let discount = document.getElementById('discount').value;
+            let discountedRate = subtotal * parseFloat(discount);
+            subtotal = subtotal - discountedRate;
+        }
+        currentBilling.value = subtotal;
+        total.value = subtotal + parseFloat(prevBal.replace(/,/g, '')) + parseFloat(penalty.replace(/,/g, ''));
+    }
+
+    function _close() {
+        window.close();
+    }
+    
+</script>

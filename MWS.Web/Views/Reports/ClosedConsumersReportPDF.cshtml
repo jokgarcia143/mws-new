@@ -1,0 +1,75 @@
+﻿@model MWS.Web.Models.ClosedConsumersReportsViewModel
+
+@{
+    ViewData["Title"] = "Closed Consumers Report";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/dist/css/table-with-totals.css">
+    <script src="~/dist/js/table-with-parameter.js?@ViewData["Title"]"></script>
+    <script src="~/dist/js/html2pdf.bundle.js"></script>
+</head>
+
+<a onclick="myAlert()" id="pdfGenerate">Please wait while PDF is still downloading...</a>
+
+<section class="pdfGenerate">
+    <table id="table" class="pdf-receiving-table">
+        <caption>
+            <div class="container">
+                <div class="left-col">
+                    <img width="100" height="100" src="~/dist/img/mws_seal.png" class="mws-seal">
+                </div>
+                <div class="right-col">
+                    <h3 class="main-header">MAGALLANES WATER SYSTEM</h3>
+                    <p class="sub-header">Province of Cavite</p>
+                    <p class="address-cta">Municipality of Magallanes, Cavite</p>
+                    <h3 class="notice-cta">CLOSED or T-CLOSED CONSUMERS</h3>
+                    <p class="barangay-cta">@Model.Barangay</p>
+                </div>
+            </div>
+        </caption>
+        <thead>
+            <tr class="titles-cta">
+                <th>
+                    <p>Name</p>
+                </th>
+                <th>
+                    <p>Account No</p>
+                </th>
+                <th>
+                    <p>Meter No</p>
+                </th>
+                <th>
+                    <p>Account Type</p>
+                </th>
+                <th>
+                    <p>Status</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var consumer in Model.Consumers)
+            {
+                <tr>
+                    <td>
+                        <p>@(string.Format("{0} {1}", @consumer.Fname, @consumer.Lname)) </p>
+                    </td>
+                    <td>
+                        <p>@consumer.AcctNo</p>
+                    </td>
+                     <td>
+                        <p>@consumer.MeterNo</p>
+                    </td>
+                    <td>
+                        <p>@consumer.AcctType</p>
+                    </td>
+                    <td>
+                        <p style="color:red"><b>@consumer.Status</b></p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MWS.Web.Models.ViewModels.NewConnectionsVM>
+
+@{
+    ViewData["Title"] = "New Connection - Year";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/dist/css/table-with-totals.css">
+    <script src="~/dist/js/table-with-totals.js"></script>
+    <script src="~/dist/js/html2pdf.bundle.js"></script>
+</head>
+
+<a onclick="myAlert()" id="pdfGenerate"></a>
+<section class="pdfGenerate">
+    <span id="spn-title">NewConnections</span>
+    <table id="disconnection-receive" class="pdf-receiving-table">
+        <caption>
+            <div class="container">
+                <div class="left-col">
+                    <img width="100" height="100" src="~/dist/img/mws_seal.png" class="mws-seal">
+                </div>
+                <div class="right-col">
+                    <h3 class="main-header">MAGALLANES WATER SYSTEM</h3>
+                    <p class="sub-header">Province of Cavite</p>
+                    <p class="address-cta">Municipality of Magallanes, Cavite</p>
+                    <h3 class="notice-cta">TOTAL NEW CONNECTIONS</h3>
+                    <p class="barangay-cta">As of @DateTime.UtcNow;</p>
+                </div>
+            </div>
+        </caption>
+        <thead>
+            <tr class="titles-cta">
+                <th>
+                    <p>Barangay</p>
+                </th>
+                <th>
+                    <p>Residential</p>
+                </th>
+                <th>
+                    <p>Commercial</p>
+                </th>
+                <th>
+                    <p>Government</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <p>@item.Baranggay</p>
+                    </td>
+                    <td>
+                        <p>@item.Residential</p>
+                    </td>
+                    <td>
+                        <p>@item.Commercial</p>
+                    </td>
+                    <td>
+                        <p>@item.Government</p>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    <b>TOTAL</b>
+                </td>
+                <td>
+                    <p><b>@TempData["Residential"]</b></p>
+                </td>
+                <td>
+                    <p><b>@TempData["Residential"]</b></p>
+                </td>
+                <td>
+                    <p><b>@TempData["Residential"]</b></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>

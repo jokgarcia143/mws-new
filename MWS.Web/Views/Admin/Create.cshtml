@@ -1,0 +1,70 @@
+﻿@model MWS.Web.Models.ProjectRole
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Consumer List</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active">Consumers Data</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    @* <div class="overlay-wrapper">
+    <div class="overlay"><i class="fas fa-3x fa-sync-alt fa-spin"></i><div class="text-bold pt-2">Loading...</div></div>
+    </div>*@
+    <section id="consumer-list" class="content">
+        <div class="container-fluid">
+            <div class="tab-pane fade show active" id="custom-tabs-five-overlay" role="tabpanel" aria-labelledby="custom-tabs-five-overlay-tab">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>ProjectRole</h4>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <form asp-action="Create">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="form-group">
+                                                <label asp-for="RoleName" class="control-label"></label>
+                                                <input asp-for="RoleName" class="form-control" />
+                                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Create" class="btn btn-primary" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <a asp-action="Index">Back to List</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>

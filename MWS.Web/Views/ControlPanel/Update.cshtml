@@ -1,0 +1,184 @@
+﻿@model MWS.Web.Models.Mrate
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Update Water Consumption Rate</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/ConsumersData/Index">Water Consumption Rates</a></li>
+                        <li class="breadcrumb-item active">Edit Water Consumption Rate</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">WATER CONSUMPTION RATE DETAILS</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="post" asp-action="Update">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card card-secondary">
+                                            <input type="hidden" asp-for="Metid" class="form-control" />
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="Bracket" class="control-label"></label>
+                                                            <input type="text" asp-for="Bracket" class="form-control" />
+                                                            <span asp-validation-for="Bracket" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="Minimum" class="control-label"></label>
+                                                            <input type="text" asp-for="Minimum" class="form-control" />
+                                                            <span asp-validation-for="Minimum" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_11to30" class="control-label"></label>
+                                                            <input type="text" asp-for="_11to30" class="form-control" />
+                                                            <span asp-validation-for="_11to30" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_31to50" class="control-label"></label>
+                                                            <input asp-for="_31to50" class="form-control" />
+                                                            <span asp-validation-for="_31to50" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_51to70" class="control-label"></label>
+                                                            <input type="text" asp-for="_51to70" class="form-control" />
+                                                            <span asp-validation-for="_51to70" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_71to90" class="control-label"></label>
+                                                            <input type="text" asp-for="_71to90" class="form-control" />
+                                                            <span asp-validation-for="_71to90" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_91to110" class="control-label"></label>
+                                                            <input type="text" asp-for="_91to110" class="form-control" />
+                                                            <span asp-validation-for="_91to110" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_111to130" class="control-label"></label>
+                                                            <input type="text" asp-for="_111to130" class="form-control" />
+                                                            <span asp-validation-for="_111to130" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_131to150" class="control-label"></label>
+                                                            <input type="text" asp-for="_131to150" class="form-control" />
+                                                            <span asp-validation-for="_131to150" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_151to170" class="control-label"></label>
+                                                            <input type="text" asp-for="_151to170" class="form-control" />
+                                                            <span asp-validation-for="_151to170" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_171to190" class="control-label"></label>
+                                                            <input type="text" asp-for="_171to190" class="form-control" />
+                                                            <span asp-validation-for="_171to190" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="_191to10000" class="control-label"></label>
+                                                            <input type="text" asp-for="_191to10000" class="form-control" />
+                                                            <span asp-validation-for="_191to10000" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">                                
+                                    <button asp-action="Index" class="btn btn-danger"><i class="fa fa-window-close"></i> Close</button>
+                                    <a class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-save"></i> Update</a>
+                                    <div class="modal fade" id="modal-default">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Update Water Consumption Rate</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to update water consumption rate?</p>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> Cancel</button>
+                                                    <form method="post" asp-action="Update">
+                                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                    <!-- general form elements -->
+
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </section>
+
+</div>
