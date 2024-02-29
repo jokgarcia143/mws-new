@@ -66,12 +66,31 @@ namespace MWS.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, DateTime? fromDate, DateTime? toDate)
         {
             Customer customer = await _context.Customers.Where(c => c.Id == id).FirstOrDefaultAsync();
 
-            IEnumerable<CustomersSummary> customersSummaries = await _context.CustomersSummaries.Where(cs => cs.AcctNo == customer.AcctNo).OrderBy(cs => cs.Id).ToListAsync();
-            var lastWaterBillIssue = customersSummaries.Where(c => c.Type == "WATER BILL ISSUE").LastOrDefault();
+            IEnumerable<CustomersSummary> customersSummaries = new List<CustomersSummary>();
+
+            var lastWaterBillIssue = new CustomersSummary();
+
+
+            if (fromDate.HasValue && toDate.HasValue)
+            {
+                customersSummaries = await _context.CustomersSummaries.Where(cs => cs.AcctNo == customer.AcctNo && cs.DatePaid2 >= fromDate && cs.DatePaid2 <= toDate && cs.AmountPaid2 > 0).OrderBy(cs => cs.Id).ToListAsync();
+                lastWaterBillIssue = customersSummaries.Where(c => c.Type == "WATER BILL ISSUE" && c.DatePaid2 >= fromDate && c.DatePaid2 <= toDate && c.AmountPaid2 > 0).FirstOrDefault();
+                if(lastWaterBillIssue == null)
+                {
+                    lastWaterBillIssue = customersSummaries.Where(c => c.Type == "WATER BILL ISSUE").LastOrDefault();
+                }
+            }
+            else
+            {
+                customersSummaries = await _context.CustomersSummaries.Where(cs => cs.AcctNo == customer.AcctNo).OrderBy(cs => cs.Id).ToListAsync();
+                lastWaterBillIssue = customersSummaries.Where(c => c.Type == "WATER BILL ISSUE").LastOrDefault();
+            }
+            
+            
             var consumerSummaryViewModel = new ConsumerSummaryViewModel();
             consumerSummaryViewModel.Customer = customer;
             consumerSummaryViewModel.Address = string.Format("{0} {1} {2}", customer.Barangay, customer.UnitNo, customer.Street);

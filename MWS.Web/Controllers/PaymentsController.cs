@@ -75,6 +75,8 @@ namespace MWS.Web.Controllers
             var customer = await _context.Customers.Where(c => c.Id == id).FirstOrDefaultAsync();
             var dateNow = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
             var dailyTrans = await _context.DailyTrans.Where(dt => dt.TransDate == dateNow).ToListAsync();
+            //CHECK O.R
+
 
             var waterbill = await _context.WaterBills.Where(c => c.AcctNo == customer.AcctNo).FirstOrDefaultAsync();
 

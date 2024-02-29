@@ -168,25 +168,28 @@
                         <div class="card-header">
                             <h3 class="card-title">SUMMARY OF TRANSACTIONS</h3>
                         </div>
+                        <form asp-controller="ConsumersSummary" asp-action="Details" method="get">
+                         <input name="id" value="@Model.Customer.Id">
                         <div class="col-md-6">
                             <h4>Select Date Range</h4>
                             <div class="col-md-3">
                                 <div class="form-group">
                                 <label for="fromDate">From:</label>
-                                <input type="text" class="form-control" id="fromDate" name="fromDate">
+                                <input type="date" class="form-control" id="fromDate" name="fromDate">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                 <label for="toDate">To:</label>
-                                <input type="text" class="form-control" id="toDate" name="toDate">
+                                <input type="date" class="form-control" id="toDate" name="toDate">
                             </div>
                             </div>
 
                             
                             <button type="submit" class="btn btn-primary">Show</button>
                         </div>
-                        
+                        </form>
+
                         <div class="card-body table-responsive p-0" style="height: 340px;">
                             <table class="table table-head-fixed text-nowrap table-bordered">
                                 <thead>
