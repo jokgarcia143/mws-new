@@ -194,6 +194,7 @@
                             <table class="table table-head-fixed text-nowrap table-bordered">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>Trans No.</th>
                                         <th>Date Paid</th>
                                         <th>Type</th>
@@ -221,6 +222,9 @@
                                         @foreach (var summary in Model.CustomersSummaries.OrderByDescending(c => c.Id))
                                         {
                                         <tr>
+                                            <td>
+                                                <a href="@Url.Action("Details", "ConsumersSummary", new { @Model.Customer})" class="btn btn-danger btn-xs" target="_blank"> <i class="fa fa-xmark-square"></i> Void</a>
+                                            </td>
                                             <td>@summary.Id</td>
                                             <td>
                                                     @if (summary.DatePaid2.ToShortDateString().ToString() == "01-Jan-00")
