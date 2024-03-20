@@ -1,2 +1,15 @@
 ﻿html2pdf
 https://ekoopmans.github.io/html2pdf.js/
+
+
+TESTING
+Duplicate Account Number Not Allowed
+YTD Consumer Summary
+O.R Format - Matrix Printer
+
+TODO
+Add Voiding/Delete Capability pag na click ung Customer Summary
+Check Duplicate O.R
+Audit Trail
+PDF Format Customer Summary
+User Guide

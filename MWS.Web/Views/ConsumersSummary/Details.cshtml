@@ -195,22 +195,19 @@
                                 <thead>
                                     <tr>
                                         <th>Trans No.</th>
+                                        <th>Date Paid</th>
+                                        <th>Type</th>
                                         <th>Reading Date</th>
                                         <th>Reading (cu. m)</th>
                                         <th>Update Reading</th>
                                         <th>Action</th>
-                                        <th>Type</th>
                                         <th>Month</th>
                                         <th>Bill No.</th>
-                                        
                                         <th>Consumption</th>
                                         <th>Amount Billed</th>
                                         <th>Amount Paid</th>
                                         <th>Payments Receipt</th>
-                                        <th>Date Paid</th>
-                                        
                                         <th>Previous Date</th>
-                                        
                                         <th>Due Date</th>
                                         <th>Current Bill</th>
                                         <th>Others</th>
@@ -226,12 +223,27 @@
                                         <tr>
                                             <td>@summary.Id</td>
                                             <td>
-
-                                                    @if (summary.PresDate2.ToShortDateString().ToString() == "01/01/1900")
+                                                    @if (summary.DatePaid2.ToShortDateString().ToString() == "01-Jan-00")
                                                     {
                                                     <span>NA</span>
                                                     }
-                                                    else if (summary.PresDate2.ToShortDateString().ToString() == "19/10/1894")
+                                                    else if (summary.DatePaid2.ToShortDateString().ToString() == "19-Oct-94")
+                                                    {
+                                                    <span>NA</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        @summary.DatePaid2.ToShortDateString()
+                                                    }
+                                            </td>
+                                            <td>@summary.Type</td>
+                                            <td>
+
+                                                    @if (summary.PresDate2.ToShortDateString().ToString() == "01-Jan-00")
+                                                    {
+                                                    <span>NA</span>
+                                                    }
+                                                    else if (summary.PresDate2.ToShortDateString().ToString() == "19-Oct-94")
                                                     {
                                                     <span>NA</span>
                                                     }
@@ -240,6 +252,7 @@
                                                         @summary.PresDate2.ToShortDateString()
                                                     }
                                             </td>
+                                            
                                             <td>@Convert.ToInt32(@summary.Reading2)</td>
                                             <td>
                                                     @if (Model.LastTransactionNo == @summary.Id)
@@ -260,7 +273,6 @@
                                                     }
                                             </td>
                                             
-                                            <td>@summary.Type</td>
                                             <td>@summary.Month</td>
                                             <td>@summary.WaterBillNo</td>
                                             
@@ -268,28 +280,15 @@
                                             <td class="text-right-align">@summary.AmountBilled2</td>
                                             <td class="text-right-align">@summary.AmountPaid2</td>
                                             <td>@summary.OfficialReceipt</td>
-                                            <td>
-                                                @if (summary.DatePaid2.ToShortDateString().ToString() == "01/01/1900")
-                                                {
-                                                        <span>NA</span>
-                                                }
-                                                    else if (summary.DatePaid2.ToShortDateString().ToString() == "19/10/1894")
-                                                {
-                                                    <span>NA</span>
-                                                }
-                                                else
-                                                {
-                                                  @summary.DatePaid2.ToShortDateString()
-                                                }
-                                            </td>
+                                            
                                             
                                             <td>
 
-                                                    @if (summary.PrevDate2.ToShortDateString().ToString() == "01/01/1900")
+                                                    @if (summary.PrevDate2.ToShortDateString().ToString() == "01-Jan-00")
                                                     {
                                                     <span>NA</span>
                                                     }
-                                                    else if (summary.PrevDate2.ToShortDateString().ToString() == "19/10/1894")
+                                                    else if (summary.PrevDate2.ToShortDateString().ToString() == "19-Oct-94")
                                                     {
                                                     <span>NA</span>
                                                     }
@@ -301,11 +300,11 @@
                                             
                                             <td>
 
-                                                    @if (summary.DueDate2.ToShortDateString().ToString() == "01/01/1900")
+                                                    @if (summary.DueDate2.ToShortDateString().ToString() == "01-Jan-00")
                                                     {
                                                     <span>NA</span>
                                                     }
-                                                    else if (summary.DueDate2.ToShortDateString().ToString() == "19/10/1894")
+                                                    else if (summary.DueDate2.ToShortDateString().ToString() == "19-Oct-94")
                                                     {
                                                     <span>NA</span>
                                                     }
