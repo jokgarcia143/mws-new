@@ -20,7 +20,8 @@ namespace MWS.Web.Models
         [Column(TypeName = "nvarchar(50)")]
         public string Type { get; set; }
 
-        public int TypeNo { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        public string TypeNo { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
         public string AcctNo { get; set; }

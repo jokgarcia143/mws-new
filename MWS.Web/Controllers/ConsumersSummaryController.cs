@@ -161,7 +161,7 @@ namespace MWS.Web.Controllers
             {
                 Barangay = _customer.Barangay,
                 Type = "CHANGE METER NO",
-                TypeNo = 10,
+                TypeNo = "10",
                 AcctNo = _customer.AcctNo,
                 Name = "NA",
                 Address = "NA",
