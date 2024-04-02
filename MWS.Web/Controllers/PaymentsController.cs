@@ -72,6 +72,8 @@ namespace MWS.Web.Controllers
         }
         public async Task<IActionResult> Details(int? id)
         {
+            //
+            var transaction = new TransactionViewModel();
             var customer = await _context.Customers.Where(c => c.Id == id).FirstOrDefaultAsync();
             var dateNow = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
             var dailyTrans = await _context.DailyTrans.Where(dt => dt.TransDate == dateNow).ToListAsync();
@@ -95,16 +97,26 @@ namespace MWS.Web.Controllers
 
             TempData["EnvFee"] = fee.EnvironmentalFee;
 
-
-            var transaction = new TransactionViewModel
+            if(customersSummary != null)
             {
-                Customer = customer,
-                Address = string.Format("{0} {1} {2}", customer.Barangay, customer.UnitNo, customer.Street),
-                DailyTransList = dailyTrans,
-                CurrentTotalBalance = Convert.ToDecimal(waterbill.PrevBal2),
-                WaterBillNo = customersSummary.WaterBillNo,
-                Consumed = customersSummary.Consumed2
-            };
+                transaction.Customer = customer;
+                transaction.Address = string.Format("{0} {1} {2}", customer.Barangay, customer.UnitNo, customer.Street);
+                transaction.DailyTransList = dailyTrans;
+                transaction.CurrentTotalBalance = Convert.ToDecimal(waterbill.PrevBal2);
+                transaction.WaterBillNo = customersSummary.WaterBillNo;
+                transaction.Consumed = customersSummary.Consumed2;
+            }
+            else
+            {
+                transaction.Customer = customer;
+                transaction.Address = string.Format("{0} {1} {2}", customer.Barangay, customer.UnitNo, customer.Street);
+                transaction.DailyTransList = dailyTrans;
+                transaction.CurrentTotalBalance = 0.00m;
+                transaction.WaterBillNo = "N/A";
+                transaction.Consumed = 0.00m;
+            }
+
+
             ViewBag.Years = _years;
 
             return View(transaction);
@@ -141,7 +153,14 @@ namespace MWS.Web.Controllers
                 string fee = _fee.Replace(",", "");
                 transactionVM.AmountPaid = Convert.ToDecimal(fee);
             }
-            
+            else if (transactionVM.Type == "1")
+            {
+                if(transactionVM.CurrentTotalBalance <= 0)
+                {
+                    TempData["OR"] = "Cannot Pay 0.00 Curent Balance";
+                    return RedirectToAction("Details", new { id = transactionVM.Customer.Id });
+                }
+            }
 
             ViewBag.Years = _years;
 

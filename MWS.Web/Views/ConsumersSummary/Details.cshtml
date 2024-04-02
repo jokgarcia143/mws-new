@@ -5,24 +5,16 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
     Layout = "~/Views/Shared/_BlankLayout.cshtml";
 }
-
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 <!-- Bootstrap Datepicker CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
 <!-- Bootstrap Datepicker JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-
 <div>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -43,7 +35,6 @@
     </section>
     <section id="consumer-summary-details" class="content">
         <div class="container-fluid">
-
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
@@ -55,14 +46,10 @@
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
                                 </button>
-                                @*  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                                </button>*@
                             </div>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-
                         <div class="card-body">
                             <form method="post" asp-action="Update">
                                 <div class="row">
@@ -139,9 +126,7 @@
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-window-close"></i> Cancel</button>
-
                                                             <button type="submit" class="btn btn-primary"> <i class="fa fa-check"></i> OK</button>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -155,7 +140,6 @@
                 </div>
             </div>
         </div>
-
     </section>
     <section class="content">
         <div class="container-fluid">
@@ -163,13 +147,12 @@
                 <div class="col-12">
                     <div class="card card-secondary">
                         <div class="row">
-                            
                         </div>
                         <div class="card-header">
                             <h3 class="card-title">SUMMARY OF TRANSACTIONS</h3>
                         </div>
                         <form asp-controller="ConsumersSummary" asp-action="Details" method="get">
-                         <input name="id" value="@Model.Customer.Id">
+                         <input name="id" value="@Model.Customer.Id" hidden>
                         <div class="col-md-6">
                             <h4>Select Date Range</h4>
                             <div class="col-md-3">
@@ -184,12 +167,9 @@
                                 <input type="date" class="form-control" id="toDate" name="toDate">
                             </div>
                             </div>
-
-                            
                             <button type="submit" class="btn btn-primary">Show</button>
                         </div>
                         </form>
-
                         <div class="card-body table-responsive p-0" style="height: 340px;">
                             <table class="table table-head-fixed text-nowrap table-bordered">
                                 <thead>
@@ -214,8 +194,7 @@
                                         <th>Others</th>
                                         <th>Previous Balance</th>
                                         <th>Balance</th>
-                                        
-                                    </tr>
+                                        </tr>
                                 </thead>
                                 <tbody>
                                     <form method="post" asp-action="UpdateMeterReading">
@@ -242,7 +221,6 @@
                                             </td>
                                             <td>@summary.Type</td>
                                             <td>
-
                                                     @if (summary.PresDate2.ToShortDateString().ToString() == "01-Jan-00")
                                                     {
                                                     <span>NA</span>
@@ -256,7 +234,6 @@
                                                         @summary.PresDate2.ToShortDateString()
                                                     }
                                             </td>
-                                            
                                             <td>@Convert.ToInt32(@summary.Reading2)</td>
                                             <td>
                                                     @if (Model.LastTransactionNo == @summary.Id)
@@ -273,21 +250,15 @@
                                                     <button class="btn btn-info btn-xs" name="Command" value="save" type="submit">SAVE</button>
                                                     <a target="_blank" asp-controller="ConsumersSummary" asp-action="ReprintWaterBillPDF" asp-route-acctNo=@summary.AcctNo id="btn-reprint" class="btn btn-info btn-xs"> <i class="fa fa-print"></i> REPRINT </a>
                                                         @*<a target="_blank asp-controller="ConsumersSummary" asp-action="ReprintWaterBillPDF" asp-route-id=@summary.Id target="_blank" id="btn-reprint" class="btn btn-info btn-xs"> <i class="fa fa-print"></i> REPRINT WATER BILL</a>*@
-
                                                     }
                                             </td>
-                                            
                                             <td>@summary.Month</td>
                                             <td>@summary.WaterBillNo</td>
-                                            
                                             <td class="text-right-align">@summary.Consumed2</td>
                                             <td class="text-right-align">@summary.AmountBilled2</td>
                                             <td class="text-right-align">@summary.AmountPaid2</td>
                                             <td>@summary.OfficialReceipt</td>
-                                            
-                                            
                                             <td>
-
                                                     @if (summary.PrevDate2.ToShortDateString().ToString() == "01-Jan-00")
                                                     {
                                                     <span>NA</span>
@@ -301,9 +272,7 @@
                                                         @summary.PrevDate2.ToShortDateString()
                                                     }
                                             </td>
-                                            
                                             <td>
-
                                                     @if (summary.DueDate2.ToShortDateString().ToString() == "01-Jan-00")
                                                     {
                                                     <span>NA</span>
@@ -321,7 +290,6 @@
                                             <td class="text-right-align">@summary.Others</td>
                                             <td class="text-right-align">@summary.PrevBal2</td>
                                             <td class="text-right-align">@summary.Balance2</td>
-                                            
                                         </tr>
                                         }
                                     </form>
@@ -333,7 +301,6 @@
                     <!-- /.card -->
                 </div>
             </div>
-            
         </div>
         <footer>
             <div class="row">
@@ -342,7 +309,6 @@
                     <a class="btn btn-primary wd-50" target="_blank" asp-controller="ConsumersSummary" asp-action="PrintSummaryPDF" asp-route-acctNo=@Model.Customer.AcctNo> <i class="fa fa-print"></i> PRINT SUMMARY</a>
                     <a class="btn btn-primary wd-50" asp-controller="ConsumersSummary" asp-action="AddFee" asp-route-id="@Model.Customer.Id"> <i class="fa fa-plus-square"></i> ADD FEES</a>
                 </div>
-
             </div>
         </footer>
     </section>
