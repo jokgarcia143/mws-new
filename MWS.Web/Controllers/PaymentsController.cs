@@ -76,7 +76,7 @@ namespace MWS.Web.Controllers
             var transaction = new TransactionViewModel();
             var customer = await _context.Customers.Where(c => c.Id == id).FirstOrDefaultAsync();
             var dateNow = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
-            var dailyTrans = await _context.DailyTrans.Where(dt => dt.TransDate == dateNow).ToListAsync();
+            var dailyTrans = await _context.DailyTrans.ToListAsync();
             //CHECK O.R
 
 
@@ -218,7 +218,7 @@ namespace MWS.Web.Controllers
                     AccountNo = transactionVM.Customer.AcctNo,
                     Amount = transactionVM.AmountPaid,
                     Cashier = userName,
-                    TransDate = DateTime.Now.ToString(dateFormat),
+                    TransDate = DateTime.Now.ToShortDateString(),
                     Or = transactionVM.OfficialReceipt,
                     Payor = string.Format("{0} {1} {2}", transactionVM.Customer.Fname, transactionVM.Customer.Mi, transactionVM.Customer.Lname),
                     Particulars = String.Format("{0} Payment", transactionVM.Type)
@@ -309,7 +309,7 @@ namespace MWS.Web.Controllers
 
         }
         [HttpGet] //selectedValue
-        public string GetFee(string selectedValue)
+        public string GetFee(string selectedValue, string acctType)
         {
             var fee = _context.Fees.SingleOrDefault();
             string feeString = "N";
@@ -317,7 +317,18 @@ namespace MWS.Web.Controllers
             {
                 if (selectedValue == "3")
                 {
-                    feeString = fee.ConnectionFee.ToString();
+                    if (acctType == "Commercial")
+                    {
+                        feeString = "8,000.00";
+                    }
+                    else if (acctType == "Government")
+                    {
+                        feeString = "3,000.00";
+                    }
+                    else
+                    {
+                        feeString = fee.ConnectionFee.ToString();
+                    }
                 }
                 else if (selectedValue == "4")
                 {
@@ -325,7 +336,17 @@ namespace MWS.Web.Controllers
                 }
                 else if (selectedValue == "5")
                 {
-                    feeString = fee.ConnectionFee.ToString();
+                    if(acctType == "Commercial")
+                    {
+                        feeString = "8,000.00";
+                    }
+                    else if (acctType == "Government")
+                    {
+                        feeString = "3,000.00";
+                    }
+                    else {
+                        feeString = fee.ConnectionFee.ToString();
+                    }
                 }
                 else if (selectedValue == "6")
                 {
