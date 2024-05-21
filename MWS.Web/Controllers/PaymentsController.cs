@@ -142,7 +142,9 @@ namespace MWS.Web.Controllers
                 return RedirectToAction("Details", "Payments", new { id = transactionVM.Customer.Id });
             }
 
-            var waterBill = await _context.WaterBills.Where(c => c.AcctNo == transactionVM.Customer.AcctNo).FirstOrDefaultAsync();
+            var waterBill = new WaterBill();
+
+            waterBill = await _context.WaterBills.Where(c => c.AcctNo == transactionVM.Customer.AcctNo).FirstOrDefaultAsync();
             var balance = (transactionVM.CurrentTotalBalance - transactionVM.AmountPaid).ToString();
             var transaction = await _context.TransactionTypes.Where(c => c.Code == transactionVM.Type).SingleOrDefaultAsync();
 
@@ -167,8 +169,6 @@ namespace MWS.Web.Controllers
             if (ModelState.IsValid)
             {
                 CustomersSummary customerSummary;
-
-
 
                 customerSummary = new CustomersSummary
                 {
