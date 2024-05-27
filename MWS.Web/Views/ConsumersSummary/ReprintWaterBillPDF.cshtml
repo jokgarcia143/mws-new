@@ -100,14 +100,14 @@
             </td>
             <td style="width:44pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s11" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;">
-                    @if (Model.PresDate2.ToShortDateString().ToString() == "01/01/1900")
+                    @if (Model.PresDate2.ToShortDateString().ToString() == "10/19/1894")
                     {
                         <span style="color:red">NA</span>
                     }
                     else
                     {
-                        
-                       <span>@DateTime.Now.ToShortDateString()</span>
+
+                        <span>@Model.PresDate2.ToShortDateString().ToString()</span>
                     }
                 </p>
             </td>
@@ -122,13 +122,13 @@
             </td>
             <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s11" style="padding-left: 6pt;text-indent: 0pt;line-height: 9pt;text-align: left; color:red;">
-                    @if (Model.DueDate2.ToShortDateString().ToString() == "01/01/1900")
+                    @if (Model.DueDate2.ToShortDateString().ToString() == "10/19/1894")
                     {
                         <span style="color:red">NA</span>
                     }
                     else
                     {
-                        <span>@Model.DueDate2.ToShortDateString()</span>
+                        <span>@Model.DueDate2.ToShortDateString().ToString()</span>
                     }
                 </p>
             </td>
@@ -137,13 +137,13 @@
             </td>
             <td style="width:44pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s11" style="padding-left: 2pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">
-                    @if (Model.PresDate2.ToShortDateString().ToString() == "01/01/1900")
+                    @if (Model.PresDate2.ToShortDateString().ToString() == "10/19/1894")
                     {
                         <span style="color:red">NA</span>
                     }
                     else
                     {
-                        <span>@DateTime.Now.ToShortDateString()</span>
+                        <span>@Model.PresDate2.ToShortDateString().ToString()</span>
                     }
                 </p>
             </td>
@@ -158,13 +158,13 @@
             </td>
             <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s11" style="padding-left: 7pt;text-indent: 0pt;line-height: 9pt;text-align: left; color:red">
-                    @if (Model.DueDate2.ToShortDateString().ToString() == "01/01/1900")
+                    @if (Model.DueDate2.ToShortDateString().ToString() == "10/19/1894")
                     {
                         <span style="color:red">NA</span>
                     }
                     else
                     {
-                        <span>@Model.DueDate2.ToShortDateString()</span>
+                        <span>@Model.DueDate2.ToShortDateString().ToString()</span>
                     }
                 </p>
             </td>

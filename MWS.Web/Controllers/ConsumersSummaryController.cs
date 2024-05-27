@@ -304,9 +304,9 @@ namespace MWS.Web.Controllers
 
             if (customerSummary != null)
             {
-                if(customerSummary.PrevRead2 > 0 || customerSummary.PrevRead2 > 0)
+                if(customerSummary.PrevRead2 > 0 || customerSummary.PrevBal2 > 0)
                 {
-                    customerSummary.DueDate2 = DateTime.Now.AddDays(15);
+                    customerSummary.DueDate2 = customerSummary.DueDate2.AddDays(15);
                     _context.SaveChanges();
                 }
                 else
