@@ -73,3 +73,8 @@ caption {
 .tables-section {
     display: none;
 }
+
+.page-break {
+    display: block;
+    page-break-before: always;
+}

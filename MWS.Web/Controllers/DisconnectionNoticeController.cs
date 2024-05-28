@@ -39,6 +39,7 @@ namespace MWS.Web.Controllers
 
         public IActionResult Index()
         {
+            TempData["BrgyId"] = "0";
             DisconnectionNoticeViewModel disconnectionNoticeVM = new()
             {
                 Barangays = _barangays,

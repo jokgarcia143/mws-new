@@ -300,8 +300,8 @@ namespace MWS.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ReprintWaterBillPDF(string acctNo)
         {
-            var customerSummary = await _context.CustomersSummaries.OrderByDescending(c => c.PrevDate2).Where(c => c.AcctNo == acctNo.Trim()).FirstOrDefaultAsync();
-
+            var customerSummary = await _context.CustomersSummaries.OrderByDescending(c => c.PrevDate2).Where(c => c.AcctNo == acctNo.Trim() && c.AmountPaid2 == 0).FirstOrDefaultAsync();
+            var sum = _context.CustomersSummaries.Where(c => c.AcctNo == acctNo.Trim() && c.AmountPaid2 == 0 && c.AmountBilled2 > 0).Sum(c => c.AmountBilled2);
             if (customerSummary != null)
             {
                 if(customerSummary.PrevRead2 > 0 || customerSummary.PrevBal2 > 0)
