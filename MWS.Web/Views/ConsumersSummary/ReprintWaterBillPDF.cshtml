@@ -106,7 +106,7 @@
                     }
                     else
                     {
-
+                        
                         <span>@Model.PresDate2.ToShortDateString().ToString()</span>
                     }
                 </p>
@@ -128,7 +128,7 @@
                     }
                     else
                     {
-                        <span>@Model.DueDate2.ToShortDateString().ToString()</span>
+                        <span>@Model.PresDate2.AddDays(15).ToShortDateString().ToString()</span>
                     }
                 </p>
             </td>
@@ -164,7 +164,7 @@
                     }
                     else
                     {
-                        <span>@Model.DueDate2.ToShortDateString().ToString()</span>
+                        <span>@Model.PresDate2.AddDays(15).ToShortDateString().ToString()</span>
                     }
                 </p>
             </td>
