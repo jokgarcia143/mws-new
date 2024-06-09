@@ -76,7 +76,7 @@ namespace MWS.Web.Controllers
             var transaction = new TransactionViewModel();
             var customer = await _context.Customers.Where(c => c.Id == id).FirstOrDefaultAsync();
             var dateNow = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
-            var dailyTrans = await _context.DailyTrans.ToListAsync();
+            var dailyTrans = await _context.DailyTrans.Where(c => c.TransDate == dateNow).ToListAsync();
             //CHECK O.R
 
 
