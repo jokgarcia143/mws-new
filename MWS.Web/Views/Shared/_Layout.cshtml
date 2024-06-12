@@ -12,8 +12,6 @@
     <title>@ViewData["Title"]</title>
 
     <!-- Google Font: Source Sans Pro -->
-    @*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">*@
-    @*<link rel="stylesheet" href="../../dist/css/style.css"/>*@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
     <!-- Main -->
@@ -32,14 +30,15 @@
     <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="~/dist/css/layout.css">
     <link rel="icon" type="image/x-icon" href="~/dist/img/mws_seal.ico">
-
+    
+    
     <partial name="_LoadingScreen" />
 
+</head>
 
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     
 
-</head>
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -180,7 +179,7 @@
                             }
                             @if (User.IsInRole("Administrator"))
                             {
-                                <li class="nav-item menu-open">
+                                <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon fas fa-book"></i>
                                         <p>
@@ -213,6 +212,7 @@
             <!-- /.sidebar -->
         </aside>
 
+        
         <!-- Content Wrapper. Contains page content -->
         @RenderBody()
 
@@ -269,7 +269,6 @@
     <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
     <script src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
-   
     <!-- Page specific script -->
     <script>
         var url = window.location;

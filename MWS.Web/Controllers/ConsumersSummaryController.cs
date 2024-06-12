@@ -17,7 +17,7 @@ namespace MWS.Web.Controllers
     public class ConsumersSummaryController : Controller
     {
         private readonly MWSWebDBContext _context;
-        private readonly string _dateformat = "dd/mm/yyyy";
+        private readonly string _dateformat = "MM-dd-yyyy";
         private readonly IEnumerable<Barangay> _barangays;
 
         public ConsumersSummaryController(MWSWebDBContext context)

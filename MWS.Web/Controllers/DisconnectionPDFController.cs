@@ -42,9 +42,10 @@ namespace MWS.Web.Controllers
             return View(disconnectionPDF);
         }
 
-        public async Task<IActionResult> DisconnectionReceivingPDF()
+        public async Task<IActionResult> DisconnectionReceivingPDF(int brgyId)
         {
-            var disconnectionReceivingPDF = await _context.Disconnections.ToListAsync();
+            var brgy = _context.Barangays.Where(c => c.BrgyId == brgyId).FirstOrDefault();
+            var disconnectionReceivingPDF = await _context.Disconnections.Where(c => c.Barangay == brgy.Brgy).ToListAsync();
             return View(disconnectionReceivingPDF);
         }
     }
