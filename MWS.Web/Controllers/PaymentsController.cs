@@ -72,9 +72,11 @@ namespace MWS.Web.Controllers
         }
         public async Task<IActionResult> Details(int? id)
         {
+            //
+            var transaction = new TransactionViewModel();
             var customer = await _context.Customers.Where(c => c.Id == id).FirstOrDefaultAsync();
             var dateNow = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
-            var dailyTrans = await _context.DailyTrans.Where(dt => dt.TransDate == dateNow).ToListAsync();
+            var dailyTrans = await _context.DailyTrans.Where(c => c.TransDate == dateNow).ToListAsync();
             //CHECK O.R
 
 
@@ -95,16 +97,26 @@ namespace MWS.Web.Controllers
 
             TempData["EnvFee"] = fee.EnvironmentalFee;
 
-
-            var transaction = new TransactionViewModel
+            if(customersSummary != null)
             {
-                Customer = customer,
-                Address = string.Format("{0} {1} {2}", customer.Barangay, customer.UnitNo, customer.Street),
-                DailyTransList = dailyTrans,
-                CurrentTotalBalance = Convert.ToDecimal(waterbill.PrevBal2),
-                WaterBillNo = customersSummary.WaterBillNo,
-                Consumed = customersSummary.Consumed2
-            };
+                transaction.Customer = customer;
+                transaction.Address = string.Format("{0} {1} {2}", customer.Barangay, customer.UnitNo, customer.Street);
+                transaction.DailyTransList = dailyTrans;
+                transaction.CurrentTotalBalance = Convert.ToDecimal(waterbill.PrevBal2);
+                transaction.WaterBillNo = customersSummary.WaterBillNo;
+                transaction.Consumed = customersSummary.Consumed2;
+            }
+            else
+            {
+                transaction.Customer = customer;
+                transaction.Address = string.Format("{0} {1} {2}", customer.Barangay, customer.UnitNo, customer.Street);
+                transaction.DailyTransList = dailyTrans;
+                transaction.CurrentTotalBalance = 0.00m;
+                transaction.WaterBillNo = "N/A";
+                transaction.Consumed = 0.00m;
+            }
+
+
             ViewBag.Years = _years;
 
             return View(transaction);
@@ -130,7 +142,9 @@ namespace MWS.Web.Controllers
                 return RedirectToAction("Details", "Payments", new { id = transactionVM.Customer.Id });
             }
 
-            var waterBill = await _context.WaterBills.Where(c => c.AcctNo == transactionVM.Customer.AcctNo).FirstOrDefaultAsync();
+            var waterBill = new WaterBill();
+
+            waterBill = await _context.WaterBills.Where(c => c.AcctNo == transactionVM.Customer.AcctNo).FirstOrDefaultAsync();
             var balance = (transactionVM.CurrentTotalBalance - transactionVM.AmountPaid).ToString();
             var transaction = await _context.TransactionTypes.Where(c => c.Code == transactionVM.Type).SingleOrDefaultAsync();
 
@@ -141,15 +155,20 @@ namespace MWS.Web.Controllers
                 string fee = _fee.Replace(",", "");
                 transactionVM.AmountPaid = Convert.ToDecimal(fee);
             }
-            
+            else if (transactionVM.Type == "1")
+            {
+                if(transactionVM.CurrentTotalBalance <= 0)
+                {
+                    TempData["OR"] = "Cannot Pay 0.00 Curent Balance";
+                    return RedirectToAction("Details", new { id = transactionVM.Customer.Id });
+                }
+            }
 
             ViewBag.Years = _years;
 
             if (ModelState.IsValid)
             {
                 CustomersSummary customerSummary;
-
-
 
                 customerSummary = new CustomersSummary
                 {
@@ -199,7 +218,7 @@ namespace MWS.Web.Controllers
                     AccountNo = transactionVM.Customer.AcctNo,
                     Amount = transactionVM.AmountPaid,
                     Cashier = userName,
-                    TransDate = DateTime.Now.ToString(dateFormat),
+                    TransDate = DateTime.Now.ToShortDateString(),
                     Or = transactionVM.OfficialReceipt,
                     Payor = string.Format("{0} {1} {2}", transactionVM.Customer.Fname, transactionVM.Customer.Mi, transactionVM.Customer.Lname),
                     Particulars = String.Format("{0} Payment", transactionVM.Type)
@@ -290,7 +309,7 @@ namespace MWS.Web.Controllers
 
         }
         [HttpGet] //selectedValue
-        public string GetFee(string selectedValue)
+        public string GetFee(string selectedValue, string acctType)
         {
             var fee = _context.Fees.SingleOrDefault();
             string feeString = "N";
@@ -298,7 +317,18 @@ namespace MWS.Web.Controllers
             {
                 if (selectedValue == "3")
                 {
-                    feeString = fee.ConnectionFee.ToString();
+                    if (acctType == "Commercial")
+                    {
+                        feeString = "8,000.00";
+                    }
+                    else if (acctType == "Government")
+                    {
+                        feeString = "3,000.00";
+                    }
+                    else
+                    {
+                        feeString = fee.ConnectionFee.ToString();
+                    }
                 }
                 else if (selectedValue == "4")
                 {
@@ -306,7 +336,17 @@ namespace MWS.Web.Controllers
                 }
                 else if (selectedValue == "5")
                 {
-                    feeString = fee.ConnectionFee.ToString();
+                    if(acctType == "Commercial")
+                    {
+                        feeString = "8,000.00";
+                    }
+                    else if (acctType == "Government")
+                    {
+                        feeString = "3,000.00";
+                    }
+                    else {
+                        feeString = fee.ConnectionFee.ToString();
+                    }
                 }
                 else if (selectedValue == "6")
                 {

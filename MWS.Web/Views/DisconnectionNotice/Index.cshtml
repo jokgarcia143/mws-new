@@ -33,7 +33,7 @@
 
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))" o"></select>
+                                            <select class="form-control" asp-for="BarangayId" asp-items="@(new SelectList(Model.Barangays,"BrgyId", "Brgy"))"></select>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -69,7 +69,10 @@
                                     <div class="col-md-4">
                                         <a href="/DisconnectionPDF/DisconnectionReceivingPDF" target="_blank" id="btnReceivingGenerate" class="btn btn-primary wd-50"> <i class="fa fa-print"></i> Print Receiving Copy</a>
                                         @* <a href="/DisconnectionPDF/DisconnectionPDF" target="_blank" id="btnGenerate" class="btn btn-primary wd-50"> <i class="fa fa-print"></i> Print Notices</a> *@
-                                        <a asp-controller="DisconnectionPDF" asp-action="DisconnectionPDF" asp-route-brgyId="@TempData["BrgyId"]" target="_blank" id="btnGenerate" class="btn btn-primary wd-50"> <i class="fa fa-print"></i> Print Notices</a>
+                                        @if (TempData["BrgyId"].ToString() != "0")
+                                        {
+                                            <a asp-controller="DisconnectionPDF" asp-action="DisconnectionPDF" asp-route-brgyId="@TempData["BrgyId"]" target="_blank" id="btnGenerate" class="btn btn-primary wd-50"> <i class="fa fa-print"></i> Print Notices</a>
+                                        }
                                     </div>
                                 </div>
 

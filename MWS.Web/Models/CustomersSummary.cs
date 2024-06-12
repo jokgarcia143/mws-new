@@ -21,6 +21,9 @@ namespace MWS.Web.Models
         public string Type { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
+        public string TypeNo { get; set; }
+
+        [Column(TypeName = "nvarchar(50)")]
         public string AcctNo { get; set; }
 
         [Column(TypeName = "nvarchar(75)")]

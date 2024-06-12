@@ -62,12 +62,7 @@
         else if(selectedValue == "1" || selectedValue == "2"){
 
         }
-
     }
-
-    
-
-   
 </script>
 <div>
     <form method="post" action="">
@@ -180,8 +175,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-
                             </div>
                         </div>
                     </div>
@@ -302,7 +295,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label>Amount Paid:</label>
+                                            <label>Amount (O.R is required):</label>
                                             <input type="text" asp-for="AmountPaid" class="form-control" style="font-weight: bold;" value=0.00 id="amount-paid" required>
                                         </div>
                                     </div>
@@ -368,7 +361,7 @@
                                                 <th>Particulars</th>
                                                 <th>Amount</th>
                                                 <th>Account Number</th>
-                                                <th>Action</th>
+                                                @*<th>Action</th>*@
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -381,7 +374,7 @@
                                                     <td>@dailyTran.Particulars</td>
                                                     <td>@(String.Format("{0:#.00}", dailyTran.Amount))</td>
                                                     <td>@dailyTran.AccountNo</td>
-                                                    <td><a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-default"> <i class="fa fa-trash"></i> CANCEL</a></td>
+                                                    @*<td><a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-default"> <i class="fa fa-trash"></i> VOID</a></td>*@
                                                 </tr>
                                             }
                                         </tbody>
@@ -403,6 +396,7 @@
     }
     function handleDropdownChange() {
         var selectedValue = document.getElementById('t-type').value;
+        var acctType = document.getElementById('AcctType').value;
 
 
         // Hide all input boxes initially
@@ -418,6 +412,7 @@
 
 
         console.log("Selected : " + selectedValue)
+        console.log("acctType : " + acctType)
 
         if (selectedValue == "1") {
             currentTotal.style.display = 'block';
@@ -437,7 +432,7 @@
             _currentDiscount.style.display = 'none';
             _envFee.style.display = 'none';
         }
-        getFee(selectedValue);
+        getFee(selectedValue,acctType);
     }
 
     function changeElementTextById(elementId, newText) {
@@ -458,12 +453,12 @@
 
     });
 
-    function getFee(selectedValue) {
+    function getFee(selectedValue, acctType) {
         // Make an AJAX request
         $.ajax({
             url: '/Payments/GetFee',
             type: 'GET',
-            data: { selectedValue: selectedValue },
+            data: { selectedValue: selectedValue, acctType: acctType },
             success: function (data) {
                 // Handle success response
                 

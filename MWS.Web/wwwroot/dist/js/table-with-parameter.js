@@ -20,12 +20,11 @@ window.onload = function () {
             console.log(invoice);
             console.log(window);
             var opt = {
-                margin: [0, -0.1, 0, 0],
+                margin: [0.0],
                 filename: args.concat(' ', date.getMonth(), '-', date.getDate(), '-', date.getFullYear()),
-                image: { type: 'jpeg', quality: 1 },
-                pagebreak: { avoid: "tr", mode: "css", before: "#nextpage1", after: "1cm" },
-                html2canvas: { scale: 4, useCORS: true, dpi: 96, letterRendering: true },
-                jsPDF: { unit: 'in', format: [8.5, 11], orientation: 'portrait', putTotalPages: true }
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { dpi: 96, letterRendering: true },
+                jsPDF: { unit: 'in', format: [8.5, 11], orientation: 'portrait' }
             };
             html2pdf().from(invoice).set(opt).save();
         })

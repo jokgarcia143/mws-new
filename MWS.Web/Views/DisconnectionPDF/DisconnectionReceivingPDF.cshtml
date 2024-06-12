@@ -7,8 +7,8 @@
 
 <head>
     <link rel="stylesheet" href="~/dist/css/table-with-totals.css">
-    <script src="~/dist/js/table-with-parameter.js?@ViewData["Title"]"></script>
     <script src="~/dist/js/html2pdf.bundle.js"></script>
+    <script src="~/dist/js/table-with-parameter.js?@ViewData["Title"]"></script>
 </head>
 
 <a onclick="myAlert()" id="pdfGenerate">Please wait while PDF is still downloading...</a>
@@ -67,6 +67,7 @@
                 <p class="box">&nbsp;</p>
             </td>
         </tr>
+        <tr class="page-break"></tr>
         }
     </tbody>
 </table>
