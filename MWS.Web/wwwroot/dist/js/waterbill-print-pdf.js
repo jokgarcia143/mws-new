@@ -7,7 +7,7 @@
             var opt = {
                 margin: 0.1,
                 filename: 'WaterBill.pdf',
-                image: { type: 'jpeg', quality: 1 },
+                image: { type: 'jpeg', quality: 0.98 },
                 jsPDF: { unit: 'in', format: [8.5, 11], orientation: 'portrait' }
             };
             html2pdf().from(invoice).set(opt).save();
