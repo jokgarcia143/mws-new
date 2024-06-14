@@ -94,7 +94,7 @@ namespace MWS.Web.Controllers
 
             foreach (var customer in customers)
             {
-                var customerWaterBillSummary = customerWaterBillSummaries.Where(c => c.AcctNo == customer.AcctNo).OrderBy(cs => cs.Id).LastOrDefault();
+                var customerWaterBillSummary = customerWaterBillSummaries.Where(c => c.AcctNo == customer.AcctNo).OrderBy(cs => cs.Name).LastOrDefault();
                 if (customerWaterBillSummary != null)
                 {
                     var customerMeterReading = new MeterReadingReports
@@ -130,22 +130,26 @@ namespace MWS.Web.Controllers
         /// <returns></returns>
         public async Task<IActionResult> ReprintBatchWaterBillPDF(ReportsViewModel report)
         {
-            var startDate = Convert.ToDateTime("01/" + report.MonthId + "/" + report.SelectedYear);
+            //var startDate = Convert.ToDateTime("01/" + report.MonthId + "/" + report.SelectedYear);
+            var startDate = Convert.ToDateTime(report.MonthId + "-01-" + report.SelectedYear);
             var endDate = DateTime.Now;
 
             var selectedBrgy = _context.Barangays.Where(c => c.BrgyId == Convert.ToInt32(report.SelectedBrgy)).Select(x => x.Brgy).FirstOrDefault();
 
             if (report.MonthId == "01" || report.MonthId == "03" || report.MonthId == "05" || report.MonthId == "08" || report.MonthId == "10" || report.MonthId == "12")
             {
-                endDate = Convert.ToDateTime("31/" + report.MonthId + "/" + report.SelectedYear);
+                //endDate = Convert.ToDateTime("31/" + report.MonthId + "/" + report.SelectedYear);
+                endDate = Convert.ToDateTime(report.MonthId + "-31-" + report.SelectedYear);
             }
             else if (report.MonthId == "02")
             {
-                endDate = Convert.ToDateTime("29/" + report.MonthId + "/" + report.SelectedYear);
+                //endDate = Convert.ToDateTime("29/" + report.MonthId + "/" + report.SelectedYear);
+                endDate = Convert.ToDateTime(report.MonthId + "-29-" + report.SelectedYear);
             }
             else
             {
-                endDate = Convert.ToDateTime("30/" + report.MonthId + "/" + report.SelectedYear);
+                //endDate = Convert.ToDateTime("30/" + report.MonthId + "/" + report.SelectedYear);
+                endDate = Convert.ToDateTime(report.MonthId + "-30-" + report.SelectedYear);
             }
             
             var customerList = await _context.CustomersSummaries.Where(c => c.Barangay == selectedBrgy && c.PresDate != "NA" && (c.PresDate2 >= startDate && c.PresDate2 <= endDate)).Take(50).ToListAsync();
@@ -179,7 +183,7 @@ namespace MWS.Web.Controllers
         /// <returns></returns>
         public async Task<IActionResult> NewConnectionsReportPDF(ReportsViewModel report) 
         {
-            var startDate = Convert.ToDateTime("01-" + "01-" + report.SelectedYear);
+            var startDate = Convert.ToDateTime("01" + "-01-" + report.SelectedYear);
             var endDate = DateTime.Now;
 
 
@@ -255,22 +259,25 @@ namespace MWS.Web.Controllers
         public async Task<IActionResult> ReprintCubicConsumedPerBrgyPDF(ReportsViewModel report)
         {
             //FIELDS: Name, Account Type, Account No, Meter No, Cubic Consumed
-            var startDate = Convert.ToDateTime("01/" + report.MonthIdCubicBrgy + "/" + report.YearIdCubicBrgy);
+            //var startDate = Convert.ToDateTime("01/" + report.MonthIdCubicBrgy + "/" + report.YearIdCubicBrgy);
+            var startDate = Convert.ToDateTime(report.MonthIdCubicBrgy + "-01-" + report.YearIdCubicBrgy);
             var endDate = startDate;
 
             var selectedBrgy = _context.Barangays.Where(c => c.BrgyId == Convert.ToInt32(report.CubicBarangayId)).Select(x => x.Brgy).FirstOrDefault();
 
             if (report.MonthIdCubicBrgy == "01" || report.MonthIdCubicBrgy == "03" || report.MonthIdCubicBrgy == "05" || report.MonthIdCubicBrgy == "08" || report.MonthIdCubicBrgy == "10" || report.MonthIdCubicBrgy == "12")
             {
-                endDate = Convert.ToDateTime("31/" + report.MonthIdCubicBrgy + "/" + report.YearIdCubicBrgy);
+                //endDate = Convert.ToDateTime("31/" + report.MonthIdCubicBrgy + "/" + report.YearIdCubicBrgy);
+                endDate = Convert.ToDateTime(report.MonthIdCubicBrgy + "-31-" + report.YearIdCubicBrgy);
             }
             else if (report.MonthId == "02")
             {
-                endDate = Convert.ToDateTime("29/" + report.MonthIdCubicBrgy + "/" + report.YearIdCubicBrgy);
+                //endDate = Convert.ToDateTime("29/" + report.MonthIdCubicBrgy + "/" + report.YearIdCubicBrgy);
+                endDate = Convert.ToDateTime(report.MonthIdCubicBrgy + "-29-" + report.YearIdCubicBrgy);
             }
             else
             {
-                endDate = Convert.ToDateTime("30/" + report.MonthIdCubicBrgy + "/" + report.YearIdCubicBrgy);
+                endDate = Convert.ToDateTime(report.MonthIdCubicBrgy + "-30-" + report.YearIdCubicBrgy);
             }
 
             var customerList = await _context.CustomersSummaries.Where(c => c.Barangay == selectedBrgy && c.PresDate != "NA" && (c.PresDate2 >= startDate && c.PresDate2 <= endDate)).Take(50).ToListAsync();
