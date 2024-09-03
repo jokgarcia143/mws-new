@@ -13,7 +13,7 @@
     <script src="~/dist/js/html2pdf.bundle.js"></script>
 </head>
 
-<a onclick="myAlert()" id="pdfGenerate">Please wait while PDF is still downloading...</a>
+<a onclick="myAlert()" id="pdfGenerate"></a>
 
 <section class="pdfGenerate">
     
@@ -31,18 +31,14 @@
                     <h3 class="notice-cta">CUSTOMER SUMMARY OF TRANSACTIONS</h3>
                 </div>
             </div>
-            <p style="float:left">
+            <p style="float:inherit">
                 <span style="float:left"><b>Customer:</b> @Model.First().Name</span>
             <br />
                 <span style="float:left"><b>Address:</b> @Model.First().Address</span>
-            </p>
-            <p style="float:right">
-                <span><b>Account No:</b> @Model.First().AcctNo</span>
-                <br />
-                <span><b>Meter No:</b> @Model.First().MeterNo</span>
-            </p>
-            <p style="float:right">
-                
+            <br />
+                <span style="float:left"><b>Account No:</b> @Model.First().AcctNo</span>
+            <br />
+                <span style="float:left"><b>Meter No:</b> @Model.First().MeterNo</span>
             </p>
         </caption>
         <thead>

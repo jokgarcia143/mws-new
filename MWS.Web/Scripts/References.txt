@@ -13,3 +13,8 @@ Check Duplicate O.R
 Audit Trail
 PDF Format Customer Summary
 User Guide
+
+PAGE BREAK FIX
+https://jsfiddle.net/eKoopmans/02nbmwt7/
+https://ekoopmans.github.io/html2pdf.js/#page-breaks
+https://artskydj.github.io/jsPDF/docs/jsPDF.html#movePage
