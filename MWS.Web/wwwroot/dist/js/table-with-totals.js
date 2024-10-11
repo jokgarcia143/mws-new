@@ -7,7 +7,7 @@
             console.log(window);
             var opt = {
                 html2canvas: {
-                    dpi: 192,
+                    dpi: 96,
                     scale: 4,
                     letterRendering: true,
                     useCORS: true

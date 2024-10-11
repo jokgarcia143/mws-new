@@ -5,6 +5,12 @@
             console.log(invoice);
             console.log(window);
             var opt = {
+                html2canvas: {
+                    dpi: 96,
+                    scale: 4,
+                    letterRendering: true,
+                    useCORS: true
+                },
                 margin: 0.1,
                 filename: 'PrintReceiving.pdf',
                 image: { type: 'jpeg', quality: 0.95 },

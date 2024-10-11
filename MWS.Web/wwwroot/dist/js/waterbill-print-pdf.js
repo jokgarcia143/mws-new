@@ -8,7 +8,7 @@
                 margin: [20,20,20,20],
                 autoPaging: 'text', 
                 filename: 'WaterBill.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
+                image: { type: 'jpeg', quality: 1},
                 jsPDF: { unit: 'in', format: [8.5, 11], orientation: 'portrait' },
                 html2canvas: {
                     allowTaint: true,
