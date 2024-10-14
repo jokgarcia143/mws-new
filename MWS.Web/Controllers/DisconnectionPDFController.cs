@@ -8,11 +8,7 @@ using MWS.Web.Services;
 using System.Collections.Generic;
 using System;
 using Microsoft.AspNetCore.Hosting;
-using System.Text;
-using DinkToPdf;
 using DinkToPdf.Contracts;
-using System.IO;
-using SelectPdf;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 
@@ -45,6 +41,8 @@ namespace MWS.Web.Controllers
         public async Task<IActionResult> DisconnectionReceivingPDF(int brgyId)
         {
             var brgy = _context.Barangays.Where(c => c.BrgyId == brgyId).FirstOrDefault();
+            //
+            ViewData["Barangay"] = brgy.Brgy;
             var disconnectionReceivingPDF = await _context.Disconnections.Where(c => c.Barangay == brgy.Brgy).ToListAsync();
             return View(disconnectionReceivingPDF);
         }
