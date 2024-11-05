@@ -61,6 +61,16 @@ namespace MWS.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        
+        public IActionResult ViewReport()
+        {
+            string reportName = "AllCustomers";
+            string _reportServerUrl = "http://localhost:4040/reports/report";
+            ViewBag.ReportUrl = $"{_reportServerUrl}/{reportName}?rs:Command=Render";
+            return View();
+        }
+
         public async Task<IActionResult> EditUserRole(string Id)
         {            
 
