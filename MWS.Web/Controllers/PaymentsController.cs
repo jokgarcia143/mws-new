@@ -125,15 +125,17 @@ namespace MWS.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(TransactionViewModel transactionVM)
         {
-            var userName = HttpContext.Session.GetString("UNAME");
-            if (userName == null)
-            {
-                //return Redirect("Error");
-                return Redirect("/Identity/Account/Login");
-            }
+            //var userName = HttpContext.Session.GetString("UNAME");
+            //if (userName == null)
+            //{
+            //    return Redirect("Error");
+            //    return Redirect("/Identity/Account/Login");
+            //}
 
+            CustomersSummary customerSummary;
+
+            
             //Check O.R
-            //CustomersSummary customersSummary = new CustomersSummary();
             var checkOR = await _context.CustomersSummaries.Where(c => c.OfficialReceipt == transactionVM.OfficialReceipt).SingleOrDefaultAsync();
             if (checkOR != null)
             {
@@ -166,9 +168,10 @@ namespace MWS.Web.Controllers
 
             ViewBag.Years = _years;
 
+            
+
             if (ModelState.IsValid)
             {
-                CustomersSummary customerSummary;
 
                 customerSummary = new CustomersSummary
                 {
@@ -176,8 +179,8 @@ namespace MWS.Web.Controllers
                     //Type = String.Format("{0} Payment", transactionVM.Type),
                     Type = transaction.TName,
                     AcctNo = transactionVM.Customer.AcctNo,
-                    Name = "NA",
-                    Address = "NA",
+                    Name = transactionVM.Customer.Fname + " " + transactionVM.Customer.Lname,
+                    Address = transactionVM.Customer.Barangay,
                     Month = String.Format("{0} / {1}", transactionVM.Month, transactionVM.Year),
                     WaterBillNo = transactionVM.WaterBillNo,
                     Reading = "NA",
@@ -217,7 +220,7 @@ namespace MWS.Web.Controllers
                 {
                     AccountNo = transactionVM.Customer.AcctNo,
                     Amount = transactionVM.AmountPaid,
-                    Cashier = userName,
+                    Cashier = "cashier01",
                     TransDate = DateTime.Now.ToShortDateString(),
                     Or = transactionVM.OfficialReceipt,
                     Payor = string.Format("{0} {1} {2}", transactionVM.Customer.Fname, transactionVM.Customer.Mi, transactionVM.Customer.Lname),
@@ -236,8 +239,12 @@ namespace MWS.Web.Controllers
                 _context.DailyTrans.Add(dailyTransaction);
                 await _context.SaveChangesAsync();
 
-            }
+                //ViewData
+                
 
+                return RedirectToAction("PrintORMatrix",transactionVM);
+                //return RedirectToAction("Details", new { id = transactionVM.Customer.Id });
+            }
             return RedirectToAction("Details", new { id = transactionVM.Customer.Id });
         }
         [HttpPost]
@@ -295,6 +302,12 @@ namespace MWS.Web.Controllers
                         AmountPaid2 = Convert.ToDecimal(transactionVM.AmountPaid),
                         WaterBillNo = transactionVM.WaterBillNo
                     };
+
+                    //Daily Tran
+
+
+                    //Save Payment
+
 
                     return View(customerSummary);
                 }
