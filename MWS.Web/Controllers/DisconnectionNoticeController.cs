@@ -13,7 +13,6 @@ using DinkToPdf;
 using DinkToPdf.Contracts;
 using System.IO;
 using SelectPdf;
-using TheArtOfDev.HtmlRenderer.PdfSharp;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 

@@ -1,9 +1,3 @@
-UPDATE CustomersSummary
-SET AmountPaid = REPLACE(AmountPaid, ',', ''), currentBill = REPLACE(AmountPaid, ',', ''), MonthNo = 0;
-
-UPDATE CustomersSummary
-SET AmountBilled = REPLACE(AmountBilled, ',', '')
-
 
 UPDATE CustomersSummary
 SET Reading2 = 0.00
@@ -21,16 +15,24 @@ UPDATE CustomersSummary
 SET Consumed2 = Consumed
 WHERE ISNUMERIC(Consumed) = 1
 
+
+
+--AmountBilled
+UPDATE CustomersSummary
+SET AmountBilled = REPLACE(AmountBilled, ',', '')
+
 UPDATE CustomersSummary
 SET AmountBilled2 = 0
 WHERE ISNUMERIC(AmountBilled) <> 1
 
---AmountBilled
 UPDATE CustomersSummary
 SET AmountBilled2 = AmountBilled
 WHERE ISNUMERIC(AmountBilled) = 1
 
 --AmountPaid
+UPDATE CustomersSummary
+SET AmountPaid = REPLACE(AmountPaid, ',', ''), currentBill = REPLACE(AmountPaid, ',', ''), MonthNo = 0;
+
 UPDATE CustomersSummary
 SET AmountPaid2 = 0.00
 WHERE AmountPaid IN ('NA','UNPAID')

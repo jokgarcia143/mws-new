@@ -1,15 +1,11 @@
-﻿using Aspose.Pdf;
-using Aspose.Pdf.Operators;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using MWS.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheArtOfDev.HtmlRenderer.Adapters.Entities;
 
 namespace MWS.Web.Controllers
 {
@@ -182,11 +178,11 @@ namespace MWS.Web.Controllers
                 Balance = lastrecord.Balance,
                 Balance2 = lastrecord.Balance2,
                 PrevDate = "NA",
-                PresDate2 = Convert.ToDateTime("01-01-1900"),
+                //PresDate2 = Convert.ToDateTime("01-01-1900"),
                 PresDate = "NA",
-                PrevDate2 = Convert.ToDateTime("01-01-1900"),
+                //PrevDate2 = Convert.ToDateTime("01-01-1900"),
                 DueDate = "NA",
-                DueDate2 = Convert.ToDateTime("01-01-1900"),
+                //DueDate2 = Convert.ToDateTime("01-01-1900"),
                 CurrentBill = "NA",
                 CurrentBill2 = 0.00m,
                 Others = "NA",
@@ -264,15 +260,15 @@ namespace MWS.Web.Controllers
                     AmountPaid2 = 0.00m,
                     OfficialReceipt = "NA",
                     DatePaid = "NA",
-                    DatePaid2 = Convert.ToDateTime("01-01-1900"),
+                    //DatePaid2 = Convert.ToDateTime("01-01-1900"),
                     Balance = addFeesVM.NewBalance.ToString(),
                     Balance2 = 0.00m,
                     PrevDate = "NA",
-                    PresDate2 = Convert.ToDateTime("01-01-1900"),
+                    //PresDate2 = Convert.ToDateTime("01-01-1900"),
                     PresDate = DateTime.Today.ToString(_dateformat),
-                    PrevDate2 = Convert.ToDateTime("01-01-1900"),
+                    //PrevDate2 = Convert.ToDateTime("01-01-1900"),
                     DueDate = "NA",
-                    DueDate2 = Convert.ToDateTime("01-01-1900"),
+                    //DueDate2 = Convert.ToDateTime("01-01-1900"),
                     CurrentBill = "NA",
                     CurrentBill2 = 0.00m,
                     Others = "NA",
