@@ -113,14 +113,21 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label asp-for="WaterBill.PrevDate2"></label>
-                                            <input type="text" asp-for="WaterBill.PrevDate2" class="form-control" id="inputPrevDate" placeholder="Previous Date" readonly>
+                                            <label asp-for="WaterBill.PrevDate"></label>
+                                            @if (string.IsNullOrEmpty(Model.WaterBill.PrevDate.ToString()))
+                                            {
+                                                <input type="text" asp-for="WaterBill.PrevDate" class="form-control" id="inputPrevDate" placeholder="Previous Date" readonly>
+                                            }
+                                            else
+                                            {
+                                                <input type="text" asp-for="WaterBill.PrevDate" class="form-control" id="inputPrevDate" placeholder="Previous Date" readonly>
+                                            }
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label asp-for="WaterBill.PrevRead2"></label>
-                                            <input type="text" asp-for="WaterBill.PrevRead2" class="form-control" id="inputPrevRead" placeholder="Previous Reading" readonly>
+                                            <label asp-for="WaterBill.PrevRead"></label>
+                                            <input type="text" asp-for="WaterBill.PrevRead" class="form-control" id="inputPrevRead" placeholder="Previous Reading" readonly>
                                         </div>
 
                                     </div>

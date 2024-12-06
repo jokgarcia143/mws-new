@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="container mt-5">
+                <h3>TRANSACTION TYPE</h3>
+                
+
+                <a href="@Url.Action("Index", "Payments", new { transactionId = 1 })" class="btn btn-primary">
+                    WATER BILL
+                </a>
+
+                <button type="button" class="btn btn-warning
+btn-lg">NEW CONNECTION</button>
+                <button type="button" class="btn btn-success btn-lg">OTHERS</button>
+            </div>
+        </div>
+    </section>
+</div>
+    

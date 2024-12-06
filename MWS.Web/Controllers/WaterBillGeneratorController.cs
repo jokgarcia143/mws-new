@@ -117,6 +117,7 @@ namespace MWS.Web.Controllers
             //waterBillGeneratorVM.Wbcontrol = wbcontrol;
             waterBillGeneratorVM.Customer = customer;
             waterBillGeneratorVM.Discount = fee.SeniorDiscount;
+            waterBillGeneratorVM.WaterBill.PrevDate2.ToShortDateString();
 
             ViewBag.Barangay = await _context.Barangays.Distinct().ToListAsync();
             ViewBag.Minimum = mrate.Minimum;
@@ -135,6 +136,7 @@ namespace MWS.Web.Controllers
             {
                 return NotFound();
             }
+
             return View(waterBillGeneratorVM);
         }
 

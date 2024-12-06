@@ -33,7 +33,7 @@ namespace MWS.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int transactionId, string? note)
         {
             CustomerViewModel customerVM = new()
             {
@@ -41,12 +41,17 @@ namespace MWS.Web.Controllers
                 Barangays = _barangays
             };
 
+            //TempData["Type"] = transactionId.ToString();
+
             customerVM.Customers = await _context.Customers.Where(c => c.Status != "Closed" || c.Status != "T-Closed").OrderByDescending(c => c.Lname).ToListAsync();
+            customerVM.TransType = transactionId.ToString();
+
             return View(customerVM);
-            //var customers = await _context.Customers.ToListAsync();
-            //return View(customers);
         }
+        
         [HttpPost]
+
+
         public async Task<IActionResult> Index(int barangayId)
         {
 
@@ -70,9 +75,10 @@ namespace MWS.Web.Controllers
 
             return View(customerVM);
         }
-        public async Task<IActionResult> Details(int? id)
+        
+        public async Task<IActionResult> Details(int? id, string? transType)
         {
-            //
+
             var transaction = new TransactionViewModel();
             var customer = await _context.Customers.Where(c => c.Id == id).FirstOrDefaultAsync();
             var dateNow = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
@@ -82,7 +88,14 @@ namespace MWS.Web.Controllers
 
             var waterbill = await _context.WaterBills.Where(c => c.AcctNo == customer.AcctNo).FirstOrDefaultAsync();
 
-            var customersSummary = await _context.CustomersSummaries.OrderByDescending(c => c.PresDate2).Where(c => c.AcctNo == customer.AcctNo).FirstOrDefaultAsync();
+            string TransType = string.Empty;
+           
+            if(transType == "1")
+            {
+                TransType = "WATER BILL ISSUE";
+            }
+            
+            var customersSummary = await _context.CustomersSummaries.OrderByDescending(c => c.PrevDate2).Where(c => c.AcctNo == customer.AcctNo && c.Type == TransType && c.PrevBal2 > 0.00m).FirstOrDefaultAsync();
 
             var fee = await _context.Fees.Where(c => c.SeniorDiscount != null).FirstOrDefaultAsync();
 
@@ -121,6 +134,12 @@ namespace MWS.Web.Controllers
 
             return View(transaction);
         }
+
+        public async Task<IActionResult> Options()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(TransactionViewModel transactionVM)
@@ -240,6 +259,7 @@ namespace MWS.Web.Controllers
 
             return RedirectToAction("Details", new { id = transactionVM.Customer.Id });
         }
+        
         [HttpPost]
         public IActionResult PrintORPDF(TransactionViewModel transactionVM)
         {
@@ -274,6 +294,7 @@ namespace MWS.Web.Controllers
             return RedirectToAction("Details", new { id = transactionVM.Customer.Id });
 
         }
+        
         [HttpPost]
         public IActionResult PrintORMatrix(TransactionViewModel transactionVM)
         {
@@ -308,6 +329,7 @@ namespace MWS.Web.Controllers
             return RedirectToAction("Details", new { id = transactionVM.Customer.Id });
 
         }
+        
         [HttpGet] //selectedValue
         public string GetFee(string selectedValue, string acctType)
         {

@@ -140,7 +140,7 @@
                             @if (User.IsInRole("Cashier"))
                             {
                                 <li class="nav-item">
-                                    <a href="/Payments/" class="nav-link">
+                                    <a href="/Payments/Options" class="nav-link">
                                         <i class="nav-icon fa fa-money-bill"></i>
                                         <p>
                                             Payments
@@ -149,7 +149,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="/Payments/" class="nav-link">
+                                    <a asp-controller="Payments" class="nav-link">
                                         <i class="nav-icon fa fa-money-bill-wave"></i>
                                         <p>
                                             Online Payments (SOON)

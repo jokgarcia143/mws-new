@@ -73,7 +73,7 @@ namespace MWS.Web.Controllers
 
             if (fromDate.HasValue && toDate.HasValue)
             {
-                customersSummaries = await _context.CustomersSummaries.Where(cs => cs.AcctNo == customer.AcctNo && cs.DatePaid2 >= fromDate && cs.DatePaid2 <= toDate && cs.AmountPaid2 > 0).OrderBy(cs => cs.Id).ToListAsync();
+                customersSummaries = await _context.CustomersSummaries.Where(cs => cs.AcctNo == customer.AcctNo && cs.DatePaid2 >= fromDate && cs.DatePaid2 <= toDate && cs.AmountPaid2 > 0 && cs.DatePaid != "NA").OrderBy(cs => cs.Id).ToListAsync();
                 lastWaterBillIssue = customersSummaries.Where(c => c.Type == "WATER BILL ISSUE" && c.DatePaid2 >= fromDate && c.DatePaid2 <= toDate && c.AmountPaid2 > 0).FirstOrDefault();
                 if(lastWaterBillIssue == null)
                 {
@@ -82,7 +82,7 @@ namespace MWS.Web.Controllers
             }
             else
             {
-                customersSummaries = await _context.CustomersSummaries.Where(cs => cs.AcctNo == customer.AcctNo).OrderBy(cs => cs.Id).ToListAsync();
+                customersSummaries = await _context.CustomersSummaries.Where(cs => cs.AcctNo == customer.AcctNo && cs.DatePaid != "NA").OrderBy(cs => cs.Id).ToListAsync();
                 lastWaterBillIssue = customersSummaries.Where(c => c.Type == "WATER BILL ISSUE").LastOrDefault();
             }
             

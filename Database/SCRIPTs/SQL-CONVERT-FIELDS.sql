@@ -57,6 +57,16 @@ UPDATE CustomersSummary
 SET Balance2 = TRY_CAST(Balance AS DECIMAL(18, 2))
 WHERE ISNUMERIC(Balance) = 1
 
+--Prev Balance
+UPDATE CustomersSummary
+SET PrevBal = REPLACE(PrevBal, ',', '')
+UPDATE CustomersSummary
+SET PrevBal2 = 0.00
+WHERE ISNUMERIC(PrevBal) <> 1
+UPDATE CustomersSummary
+SET PrevBal2 = TRY_CAST(PrevBal AS DECIMAL(18, 2))
+WHERE ISNUMERIC(PrevBal) = 1
+
 --prevDate
 UPDATE CustomersSummary
 SET prevDate2 = TRY_CAST(prevDate AS datetime)
@@ -130,3 +140,30 @@ SELECT TOP (1000)
 SELECT * FROM CustomersSummary
 --WHERE AmountPaid <> 'UNPAID' OR AmountPaid <> 'NA'
 --WHERE AmountPaid2 IS NULL
+
+
+--Water Bill
+UPDATE WaterBill
+SET PrevBal = REPLACE(PrevBal, ',', '')
+UPDATE WaterBill
+SET PrevBal2 = 0.00
+WHERE ISNUMERIC(PrevBal) <> 1
+UPDATE WaterBill
+SET PrevBal2 = TRY_CAST(PrevBal AS DECIMAL(18, 2))
+WHERE ISNUMERIC(PrevBal) = 1
+
+UPDATE WaterBill
+SET prevDate2 = TRY_CAST(prevDate AS datetime)
+WHERE ISDATE(prevDate) = 1
+UPDATE WaterBill
+SET prevDate2 = '1894-10-19'
+WHERE ISDATE(prevDate) <> 1
+
+UPDATE WaterBill
+SET prevRead2 = 0.00
+WHERE ISNUMERIC(prevRead) <> 1
+
+UPDATE WaterBill
+SET prevRead2 = prevRead
+WHERE ISNUMERIC(prevRead) = 1
+
