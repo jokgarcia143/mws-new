@@ -35,7 +35,10 @@ namespace MWS.Web.Controllers
         {
             var brgy = _context.Barangays.Where(c => c.BrgyId == brgyId).FirstOrDefault();
             var disconnectionPDF = await _context.Disconnections.Where(c => c.Barangay == brgy.Brgy).ToListAsync();
-            return View(disconnectionPDF);
+
+            string htmlContent = "<a href='http://desktop-gdmbo8k:1010/ReportServerMWS/Pages/ReportViewer.aspx?%2fDisconnection&rs:Command=Render' target='_blank' rel='noopener noreferrer'>Go To Report Link</a>";
+            return Content(htmlContent, "text/html");
+            //return View(disconnectionPDF);
         }
 
         public async Task<IActionResult> DisconnectionReceivingPDF(int brgyId)

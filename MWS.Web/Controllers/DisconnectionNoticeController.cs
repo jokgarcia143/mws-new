@@ -52,7 +52,8 @@ namespace MWS.Web.Controllers
         {
             TempData["BrgyId"] = barangayId;
             var barangay = _barangays.Where(b => b.BrgyId == barangayId).FirstOrDefault().Brgy;
-            var customersSummaries = await _context.CustomersSummaries.Where(d => d.Barangay == barangay).ToListAsync();
+            //_context.Database.SetCommandTimeout(15000)
+;            var customersSummaries = await _context.CustomersSummaries.Where(d => d.Barangay == barangay).ToListAsync();
             var customers = await _context.Customers.Where(c => c.Barangay == barangay).ToListAsync();
             var lastTransactionNo = _context.Disconnections.Count();
             var disconnections = new List<Disconnection>();
@@ -62,7 +63,7 @@ namespace MWS.Web.Controllers
                 var latestRecord = customersSummaries.Where(c => c.AcctNo == customer.AcctNo).OrderBy(cs => cs.Id).LastOrDefault();
                 if (latestRecord != null)
                 {
-                    if (Convert.ToDouble(latestRecord.Balance) > 0 && latestRecord.DueDate != "NA")
+                    if (Convert.ToDouble(latestRecord.Balance2) > 0 && latestRecord.DueDate != "NA")
                     {
                         //string[] dueDateRaw = latestRecord.DueDate2.Split('/');
                         //var dueDate = new DateTime(Convert.ToInt32(dueDateRaw[2]), Convert.ToInt32(dueDateRaw[0]), Convert.ToInt32(dueDateRaw[1]));

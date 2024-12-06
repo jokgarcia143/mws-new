@@ -20,13 +20,12 @@
 /FIX_SCRIPT_2.sql
 /Mag.ldb
 /Quotation
-/MS Access/Mag.mdb
-/MS Access/MagNew.mdb
-/06-28-2024
-/MWS.Web/bin/Release/net5.0-windows
 /MWS.Web/~WRL1070.tmp
 /MWS.Web/~$gallanes Water Billing System.docx
-/MWS.Web/Database/08-08-24
 /MWS.Web/Database/04-02-24/MWSWeb3.bacpac
-/MWS.Web/Database/04-02-24
-/Database
+/Database/MagNew.mdb
+/Database/MWS-CONVERTED-FIELDS.bacpac
+/Database/MWS-MAY-24-EXPORT.bacpac
+/Database/MWS-USERS-ONLY.bacpac
+/MWS.Web/bin/Release/net5.0-windows
+/MWS.Web/Database/08-08-24
