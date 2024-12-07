@@ -94,7 +94,11 @@ namespace MWS.Web.Controllers
             {
                 TransType = "WATER BILL ISSUE";
             }
-            
+            if (transType == "1")
+            {
+                TransType = "WATER BILL ISSUE";
+            }
+
             var customersSummary = await _context.CustomersSummaries.OrderByDescending(c => c.PrevDate2).Where(c => c.AcctNo == customer.AcctNo && c.Type == TransType && c.PrevBal2 > 0.00m).FirstOrDefaultAsync();
 
             var fee = await _context.Fees.Where(c => c.SeniorDiscount != null).FirstOrDefaultAsync();

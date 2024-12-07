@@ -133,14 +133,6 @@ SET presDate2 = TRY_CAST(presDate AS datetime)
 WHERE presDate NOT IN ('UNPAID','NA')
 
 
-SELECT TOP (1000) 
-      [AmountPaid]
-  FROM [MWSWeb].[dbo].[CustomersSummary] GROUP BY AmountPaid
-
-SELECT * FROM CustomersSummary
---WHERE AmountPaid <> 'UNPAID' OR AmountPaid <> 'NA'
---WHERE AmountPaid2 IS NULL
-
 
 --Water Bill
 UPDATE WaterBill
