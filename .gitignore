@@ -29,3 +29,5 @@
 /Database/MWS-USERS-ONLY.bacpac
 /MWS.Web/bin/Release/net5.0-windows
 /MWS.Web/Database/08-08-24
+/MWS.POS/bin/Debug/net6.0-windows
+/MWS.POS/obj
