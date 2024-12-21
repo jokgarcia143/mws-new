@@ -41,17 +41,18 @@ namespace MWS.POS
             
 
 
-            e.Graphics.DrawString(txtDT.Text.ToString(), new Font("Arial", 14, FontStyle.Regular), Brushes.Black, new Point(25, 168));
+            e.Graphics.DrawString(txtDT.Text.ToString(), new Font("Arial", 14, FontStyle.Regular), Brushes.Black, new Point(27, 170));
 
-            e.Graphics.DrawString(txtCustomer.Text.ToString(), new Font("Arial", 9, FontStyle.Regular), Brushes.Black, new Point(25, 203));
-            e.Graphics.DrawString(txtAcctNo.Text.ToString(), new Font("Arial", 9, FontStyle.Regular), Brushes.Black, new Point(25, 216));
-            e.Graphics.DrawString(txtAddress.Text.ToString(), new Font("Arial", 9, FontStyle.Regular), Brushes.Black, new Point(25, 229));
+            e.Graphics.DrawString(txtCustomer.Text.ToString(), new Font("Arial", 9, FontStyle.Regular), Brushes.Black, new Point(55, 203));
+            e.Graphics.DrawString(txtAcctNo.Text.ToString(), new Font("Arial", 9, FontStyle.Regular), Brushes.Black, new Point(55, 216));
+            e.Graphics.DrawString(txtAddress.Text.ToString(), new Font("Arial", 9, FontStyle.Regular), Brushes.Black, new Point(55, 229));
 
-            e.Graphics.DrawString(txtType.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(25, 320));
-            e.Graphics.DrawString(txtAmount.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(250, 320));
-            e.Graphics.DrawString(txtWaterBillNo.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(25, 340));
+            e.Graphics.DrawString(txtType.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(27, 340));
+            e.Graphics.DrawString(txtAmount.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(250, 340));
+            e.Graphics.DrawString(txtMY.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(25, 360));
+            e.Graphics.DrawString(txtWaterBillNo.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(25, 380));
 
-            e.Graphics.DrawString(txtWords.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(25, 540));
+            e.Graphics.DrawString(txtWords.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(27, 545));
         }
     }
 }
