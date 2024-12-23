@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using MetroFramework.Forms;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace MWS.POS
 {
-    public partial class frmConsumers : Form
+    public partial class frmConsumers : MetroForm
     {
         private int _currentPage = 1;
         private const int PageSize = 20;
@@ -21,18 +22,21 @@ namespace MWS.POS
         private string _sortDirection = "ASC"; // Default sort direction
         private string _searchTerm = "";
         private string selectedValue = "Poblacion 1";
+        private string _transactionType = string.Empty;
 
         private string _connectionString = "Server=DESKTOP-0PV91DC;Database=MWSWeb6;Trusted_Connection=true;Encrypt=Yes;TrustServerCertificate=Yes;MultipleActiveResultSets=true;";
 
         private int totalPages = 0;
         private int totalRows = 0;
 
-        public frmConsumers()
+        public frmConsumers(string? transactionType)
         {
             InitializeComponent();
             InitializeComboBox();
             InitializeDataGridView();
             LoadDataAndBindGrid();
+            _transactionType = transactionType.ToString().Trim();
+            lblTransaction.Text = _transactionType;
             //lblCurrentPage.Text = currentPageIndex.ToString();
 
         }
@@ -85,6 +89,7 @@ namespace MWS.POS
         {
             // Get the selected value from the ComboBox
             selectedValue = comboBox1.SelectedItem.ToString();
+            LoadDataAndBindGrid();
 
         }
 
@@ -154,17 +159,11 @@ namespace MWS.POS
             grdCustomers.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "AcctType", HeaderText = "AccountType" });
             grdCustomers.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Status", HeaderText = "Status" });
 
-            // Add custom computed column (e.g., Age)
-            //grdCustomers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Age", HeaderText = "Age" });
-
-            // Add custom checkbox column for selection
-            //grdCustomers.Columns.Add(new DataGridViewCheckBoxColumn { Name = "Select", HeaderText = "Select" });
         }
         private void BindDataAndCustomize(DataTable dataTable)
         {
             // Bind the DataTable to the DataGridView
             grdCustomers.DataSource = dataTable;
-            //grdCustomers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
             // Ensure all columns are sortable
             foreach (DataGridViewColumn column in grdCustomers.Columns)
@@ -199,9 +198,11 @@ namespace MWS.POS
                 conn.Open();
 
                 // Get total record count
-                using (SqlCommand countCmd = new SqlCommand("SELECT COUNT(*) FROM Customers WHERE LName LIKE @SearchTerm", conn))
+                using (SqlCommand countCmd = new SqlCommand("SELECT COUNT(*) FROM Customers " +
+                    "WHERE LName LIKE @SearchTerm AND Barangay = @SelectedBrgy", conn))
                 {
                     countCmd.Parameters.AddWithValue("@SearchTerm", $"%{_searchTerm}%");
+                    countCmd.Parameters.AddWithValue("@SelectedBrgy", selectedValue);
                     _totalRecords = (int)countCmd.ExecuteScalar();
                 }
 
@@ -229,7 +230,6 @@ namespace MWS.POS
                                     "AND Barangay = @SelectedBrgy) AS TempTable " +
                                     "WHERE RowNum BETWEEN @StartRow AND @EndRow", conn))
                 {
-
 
 
                     cmd.Parameters.AddWithValue("@SortColumn", _sortColumn);
