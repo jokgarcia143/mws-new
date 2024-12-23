@@ -39,14 +39,11 @@ namespace MWS.POS
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            
-
-
             e.Graphics.DrawString(txtDT.Text.ToString(), new Font("Arial", 14, FontStyle.Regular), Brushes.Black, new Point(27, 170));
 
-            e.Graphics.DrawString(txtCustomer.Text.ToString(), new Font("Arial", 9, FontStyle.Regular), Brushes.Black, new Point(55, 203));
-            e.Graphics.DrawString(txtAcctNo.Text.ToString(), new Font("Arial", 9, FontStyle.Regular), Brushes.Black, new Point(55, 216));
-            e.Graphics.DrawString(txtAddress.Text.ToString(), new Font("Arial", 9, FontStyle.Regular), Brushes.Black, new Point(55, 229));
+            e.Graphics.DrawString(txtCustomer.Text.ToString(), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, new Point(55, 203));
+            e.Graphics.DrawString(txtAcctNo.Text.ToString(), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, new Point(55, 216));
+            e.Graphics.DrawString(txtAddress.Text.ToString(), new Font("Arial", 9, FontStyle.Bold), Brushes.Black, new Point(55, 229));
 
             e.Graphics.DrawString(txtType.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(27, 340));
             e.Graphics.DrawString(txtAmount.Text.ToString(), new Font("Arial", 10, FontStyle.Regular), Brushes.Black, new Point(250, 340));
