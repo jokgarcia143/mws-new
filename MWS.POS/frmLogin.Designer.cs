@@ -79,7 +79,14 @@
             // btnLogin
             // 
             btnLogin.BackColor = Color.Red;
+            btnLogin.FlatAppearance.BorderColor = Color.Red;
+            btnLogin.FlatAppearance.BorderSize = 2;
+            btnLogin.FlatAppearance.MouseDownBackColor = Color.Lime;
+            btnLogin.FlatAppearance.MouseOverBackColor = Color.Lime;
+            btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.Highlight = false;
+            btnLogin.Image = Properties.Resources.sign_in_alt;
+            btnLogin.ImageAlign = ContentAlignment.MiddleLeft;
             btnLogin.Location = new Point(171, 181);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(96, 42);
@@ -88,7 +95,7 @@
             btnLogin.TabIndex = 1;
             btnLogin.Text = "LOGIN";
             btnLogin.Theme = MetroFramework.MetroThemeStyle.Light;
-            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
             // 
             // btnClose
@@ -109,7 +116,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.home_logo;
-            pictureBox1.Location = new Point(9, 63);
+            pictureBox1.Location = new Point(9, 40);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(130, 125);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -120,7 +127,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(417, 246);
+            ClientSize = new Size(413, 233);
             Controls.Add(pictureBox1);
             Controls.Add(btnClose);
             Controls.Add(btnLogin);

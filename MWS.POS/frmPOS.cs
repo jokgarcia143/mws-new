@@ -28,6 +28,8 @@ namespace MWS.POS
             txtWaterBillNo.Text = "0000001234567888";
 
             txtWords.Text = "One Thousand Three Hundred Pesos ONLY";
+
+            
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

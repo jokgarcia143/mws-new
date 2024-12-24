@@ -16,5 +16,11 @@ namespace MWS.POS
         {
             InitializeComponent();
         }
+
+        private void btnBillPayment_Click(object sender, EventArgs e)
+        {
+            frmConsumers frmConsumers = new frmConsumers();
+            frmConsumers.Show();    
+        }
     }
 }

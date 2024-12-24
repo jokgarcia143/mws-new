@@ -53,7 +53,7 @@
             metroPanel1.HorizontalScrollbarSize = 10;
             metroPanel1.Location = new Point(16, 20);
             metroPanel1.Name = "metroPanel1";
-            metroPanel1.Size = new Size(670, 410);
+            metroPanel1.Size = new Size(260, 651);
             metroPanel1.Style = MetroFramework.MetroColorStyle.Blue;
             metroPanel1.StyleManager = null;
             metroPanel1.TabIndex = 0;
@@ -71,7 +71,7 @@
             metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
             metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             metroLabel1.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            metroLabel1.Location = new Point(236, 52);
+            metroLabel1.Location = new Point(25, 65);
             metroLabel1.Name = "metroLabel1";
             metroLabel1.Size = new Size(189, 25);
             metroLabel1.Style = MetroFramework.MetroColorStyle.Blue;
@@ -84,7 +84,7 @@
             // metroButton2
             // 
             metroButton2.Highlight = false;
-            metroButton2.Location = new Point(236, 229);
+            metroButton2.Location = new Point(25, 408);
             metroButton2.Name = "metroButton2";
             metroButton2.Size = new Size(192, 61);
             metroButton2.Style = MetroFramework.MetroColorStyle.Blue;
@@ -96,7 +96,7 @@
             // metroButton1
             // 
             metroButton1.Highlight = false;
-            metroButton1.Location = new Point(25, 229);
+            metroButton1.Location = new Point(25, 320);
             metroButton1.Name = "metroButton1";
             metroButton1.Size = new Size(192, 61);
             metroButton1.Style = MetroFramework.MetroColorStyle.Blue;
@@ -108,7 +108,7 @@
             // btnReconnection
             // 
             btnReconnection.Highlight = false;
-            btnReconnection.Location = new Point(448, 143);
+            btnReconnection.Location = new Point(25, 502);
             btnReconnection.Name = "btnReconnection";
             btnReconnection.Size = new Size(192, 61);
             btnReconnection.Style = MetroFramework.MetroColorStyle.Blue;
@@ -120,7 +120,7 @@
             // btnNewConnection
             // 
             btnNewConnection.Highlight = false;
-            btnNewConnection.Location = new Point(236, 143);
+            btnNewConnection.Location = new Point(25, 229);
             btnNewConnection.Name = "btnNewConnection";
             btnNewConnection.Size = new Size(192, 61);
             btnNewConnection.Style = MetroFramework.MetroColorStyle.Blue;
@@ -140,13 +140,15 @@
             btnBillPayment.TabIndex = 2;
             btnBillPayment.Text = "BILL PAYMENT";
             btnBillPayment.Theme = MetroFramework.MetroThemeStyle.Light;
+            btnBillPayment.Click += btnBillPayment_Click;
             // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(710, 450);
+            ClientSize = new Size(1035, 719);
             Controls.Add(metroPanel1);
+            IsMdiContainer = true;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "frmMain";
