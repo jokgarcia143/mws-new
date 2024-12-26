@@ -52,56 +52,60 @@
             grdCustomers.AllowUserToResizeRows = false;
             grdCustomers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             grdCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grdCustomers.Location = new Point(22, 139);
+            grdCustomers.Location = new Point(22, 157);
+            grdCustomers.MultiSelect = false;
             grdCustomers.Name = "grdCustomers";
-            grdCustomers.Size = new Size(850, 275);
+            grdCustomers.ReadOnly = true;
+            grdCustomers.RowHeadersWidth = 51;
+            grdCustomers.Size = new Size(850, 278);
             grdCustomers.TabIndex = 11;
             grdCustomers.CellClick += grdCustomers_CellClick;
             grdCustomers.CellDoubleClick += grdCustomers_DoubleCellClick;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(207, 107);
+            txtSearch.Location = new Point(223, 113);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(135, 26);
+            txtSearch.Size = new Size(135, 27);
             txtSearch.TabIndex = 12;
             // 
             // btnSearch
             // 
-            btnSearch.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSearch.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btnSearch.ForeColor = Color.Navy;
-            btnSearch.Location = new Point(348, 107);
+            btnSearch.Location = new Point(372, 105);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(97, 27);
+            btnSearch.Size = new Size(105, 39);
             btnSearch.TabIndex = 13;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(71, 107);
+            comboBox1.Location = new Point(85, 113);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 27);
+            comboBox1.Size = new Size(121, 28);
             comboBox1.TabIndex = 14;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Navy;
-            label2.Location = new Point(17, 110);
+            label2.Location = new Point(17, 116);
             label2.Name = "label2";
-            label2.Size = new Size(49, 20);
+            label2.Size = new Size(62, 25);
             label2.TabIndex = 15;
             label2.Text = "BRGY";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(451, 110);
+            label4.Location = new Point(481, 116);
             label4.Name = "label4";
-            label4.Size = new Size(82, 19);
+            label4.Size = new Size(89, 20);
             label4.TabIndex = 16;
             label4.Text = "(Last Name)";
             // 
@@ -109,13 +113,13 @@
             // 
             lblTransaction.AutoSize = true;
             lblTransaction.CustomBackground = false;
-            lblTransaction.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTransaction.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblTransaction.FontSize = MetroFramework.MetroLabelSize.Medium;
             lblTransaction.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             lblTransaction.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            lblTransaction.Location = new Point(348, 60);
+            lblTransaction.Location = new Point(348, 63);
             lblTransaction.Name = "lblTransaction";
-            lblTransaction.Size = new Size(108, 19);
+            lblTransaction.Size = new Size(116, 20);
             lblTransaction.Style = MetroFramework.MetroColorStyle.Blue;
             lblTransaction.StyleManager = null;
             lblTransaction.TabIndex = 17;
@@ -125,9 +129,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(699, 420);
+            button1.Location = new Point(699, 442);
             button1.Name = "button1";
-            button1.Size = new Size(121, 37);
+            button1.Size = new Size(121, 39);
             button1.TabIndex = 18;
             button1.Text = "WATER BILL";
             button1.UseVisualStyleBackColor = true;
@@ -145,9 +149,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(553, 420);
+            button2.Location = new Point(553, 442);
             button2.Name = "button2";
-            button2.Size = new Size(121, 37);
+            button2.Size = new Size(121, 39);
             button2.TabIndex = 19;
             button2.Text = "NOTICE";
             button2.UseVisualStyleBackColor = true;
@@ -155,9 +159,8 @@
             // 
             // frmConsumers
             // 
-            AutoScaleDimensions = new SizeF(8F, 19F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(894, 480);
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(894, 505);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(lblTransaction);
@@ -169,6 +172,7 @@
             Controls.Add(grdCustomers);
             Location = new Point(0, 0);
             Name = "frmConsumers";
+            Padding = new Padding(20, 63, 20, 21);
             ((System.ComponentModel.ISupportInitialize)grdCustomers).EndInit();
             ResumeLayout(false);
             PerformLayout();

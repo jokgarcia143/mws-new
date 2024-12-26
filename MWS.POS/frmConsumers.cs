@@ -26,7 +26,7 @@ namespace MWS.POS
         private string selectedValue = "Poblacion 1";
         private string _transactionType = string.Empty;
 
-        private string _connectionString = "Server=DESKTOP-0PV91DC;Database=MWSWeb6;Trusted_Connection=true;Encrypt=Yes;TrustServerCertificate=Yes;MultipleActiveResultSets=true;";
+        private string _connectionString = "Server=DESKTOP-5MH5KBE;Database=MWSWeb7;Trusted_Connection=true;Encrypt=Yes;TrustServerCertificate=Yes;MultipleActiveResultSets=true;";
 
         private int totalPages = 0;
         private int totalRows = 0;
@@ -612,7 +612,7 @@ namespace MWS.POS
             {
 
                 graphics.DrawString($"Contact Nos: (09000641223) (0468668962)", font, Brushes.Black, textStartX + 105, textStartY + 50);
-                
+
                 graphics.DrawString($"{duplicate}", font, Brushes.Gray, textStartX + 160, textStartY + 90);
 
             }
@@ -635,6 +635,11 @@ namespace MWS.POS
                 Height = 1375
             };
             previewDialog.ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
